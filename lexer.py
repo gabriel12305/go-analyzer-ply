@@ -102,11 +102,11 @@ def t_newline(t):
     
 lexer = lex.lex()
 
-with open("lexer_go/pruebas/algorithm_gabriel.go", "r", encoding="utf-8") as archivo:
+with open("pruebas/algorithm_gabriel.go", "r", encoding="utf-8") as archivo:
     data = archivo.read()
 
 timestamp = datetime.now().strftime("%d-%m-%Y-%Hh%M")
-log_filename = f"lexer_go/logs/lexico-GabrielPelaez-{timestamp}.txt"
+log_filename = f"logs/lexico-GabrielPelaez-{timestamp}.txt"
 
 lexer.input(data)
 
