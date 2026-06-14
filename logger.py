@@ -1,7 +1,7 @@
 from datetime import datetime
 import os
 
-def generate_log_filename(author_name="CarlaGutierrez"):
+def generate_log_filename(author_name="MilenaPazmiño"):
     os.makedirs("logs", exist_ok=True)
 
     timestamp = datetime.now().strftime("%d-%m-%Y-%Hh%M")

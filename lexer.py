@@ -7,6 +7,12 @@ tokens = [
     'VARIABLE',
 
     # ===== CARLA GUTIERREZ CONTRIBUTION END =====
+    
+    # ===== MILENA PAZMIÑO CONTRIBUTION START =====
+    'INTEGER',
+    'FLOAT',
+    'STRING',
+     # ===== MILENA PAZMIÑO CONTRIBUTION END =====
 
     # ===== GABRIEL PELAEZ CONTRIBUTION START =====
     
@@ -48,14 +54,16 @@ tokens = [
     'COMMA',
     'DOT',
     'SEMICOLON',
+    'COLON',
     
-    # ===== GABRIEL PELAEZ CONTRIBUTION END =====
+    # ===== GABRIEL PELAEZ CONTRIBUTION END =====    
 ]
 
 # ===== CARLA GUTIERREZ CONTRIBUTION START =====
 
 # Variables and Reserved Words
 reserved_words = {
+    'package': 'PACKAGE',
     'const': 'CONST',
     'var': 'VAR',
     'if': 'IF',
@@ -69,6 +77,11 @@ reserved_words = {
     'func': 'FUNC',
     'return': 'RETURN',
     'map': 'MAP',
+    'int': 'INT_TYPE',
+    'float64': 'FLOAT64_TYPE',
+    'string': 'STRING_TYPE',
+    'bool': 'BOOL_TYPE',
+    'range': 'RANGE',
 }
 
 tokens = tokens + list(reserved_words.values())
@@ -121,9 +134,42 @@ t_RBRACKET = r'\]'
 t_COMMA    = r','
 t_DOT      = r'\.'
 t_SEMICOLON = r';'
+t_COLON     = r':'
 
 # =======================
 # GABRIEL PELAEZ CONTRIBUTION END
+# =======================
+
+# ==========================
+# MILENA PAZMIÑO CONTRIBUTION START
+# Recognize integers, floats, strings and comments
+# ==========================
+
+def t_FLOAT(t):
+    r'\d+\.\d+'
+    t.value = float(t.value)
+    return t
+
+def t_INTEGER(t):
+    r'\d+'
+    t.value = int(t.value)
+    return t
+
+def t_STRING(t):
+    r'"([^\\\n]|(\\.))*?"'
+    return t
+
+def t_COMMENT_SINGLE(t):
+    r'//.*'
+    pass
+
+def t_COMMENT_MULTI(t):
+    r'/\*[\s\S]*?\*/'
+    t.lexer.lineno += t.value.count('\n')
+    pass
+
+# =======================
+# MILENA PAZMIÑO CONTRIBUTION END
 # =======================
 
 def t_error(t):
