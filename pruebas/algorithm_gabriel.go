@@ -30,7 +30,7 @@ func main() {
 
 	if !activo {
 	}
-
+    @
 	arreglo := [3]int{1,2,3}
 
 	fmt.Println(arreglo[0])

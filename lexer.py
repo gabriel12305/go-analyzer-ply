@@ -1,5 +1,6 @@
 import ply.lex as lex
 
+lexical_errors = []
 tokens = [ 
     # ===== CARLA GUTIERREZ CONTRIBUTION START =====
 
@@ -171,12 +172,17 @@ def t_COMMENT_MULTI(t):
 def t_UNCLOSED_STRING(t):
     r'"[^"\n]*$'
     print(f"Error léxico: cadena no cerrada en línea {t.lexer.lineno}")
+    error_msg = f"[Line {t.lexer.lineno}] ERROR           -> {t.value[0]}"
+    lexical_errors.append(error_msg)
+    
 # =======================
 # MILENA PAZMIÑO CONTRIBUTION END
 # =======================
 
 def t_error(t):
     print(f"Illegal character: {t.value[0]} at line {t.lineno}")
+    error_msg = f"[Line {t.lineno}] ERROR           -> {t.value[0]}"
+    lexical_errors.append(error_msg)
     t.lexer.skip(1)
     
 def t_newline(t):

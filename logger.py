@@ -1,5 +1,6 @@
 from datetime import datetime
 import os
+from lexer import lexical_errors
 
 def generate_log_filename(author_name="MilenaPazmiño"):
     os.makedirs("logs", exist_ok=True)
@@ -22,3 +23,9 @@ def log_tokens(lexer, data, log_filename):
 
             log.write(line)
             print(line, end="")
+        
+        if lexical_errors:
+            log.write("\n===== LEXICAL ERRORS =====\n")
+
+            for error in lexical_errors:
+                log.write(error + "\n")
