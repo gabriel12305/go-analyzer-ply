@@ -1,8 +1,13 @@
 import ply.lex as lex
-from datetime import datetime
 
-tokens = (
-    
+tokens = [ 
+    # ===== CARLA GUTIERREZ CONTRIBUTION START =====
+
+    # Identifiers
+    'VARIABLE',
+
+    # ===== CARLA GUTIERREZ CONTRIBUTION END =====
+
     # ===== GABRIEL PELAEZ CONTRIBUTION START =====
     
     # Arithmetic Operators
@@ -42,10 +47,39 @@ tokens = (
     'RBRACKET',
     'COMMA',
     'DOT',
-    'SEMICOLON'
+    'SEMICOLON',
     
     # ===== GABRIEL PELAEZ CONTRIBUTION END =====
-)
+]
+
+# ===== CARLA GUTIERREZ CONTRIBUTION START =====
+
+# Variables and Reserved Words
+reserved_words = {
+    'const': 'CONST',
+    'var': 'VAR',
+    'if': 'IF',
+    'else': 'ELSE',
+    'for': 'FOR',
+    'switch': 'SWITCH',
+    'case': 'CASE',
+    'default': 'DEFAULT',
+    'true': 'TRUE',
+    'false': 'FALSE',
+    'func': 'FUNC',
+    'return': 'RETURN',
+    'map': 'MAP',
+}
+
+tokens = tokens + list(reserved_words.values())
+
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    t.type = reserved_words.get(t.value, 'VARIABLE')
+    return t
+
+
+# ===== CARLA GUTIERREZ CONTRIBUTION END =====
 
 # ==========================
 # GABRIEL PELAEZ CONTRIBUTION START
@@ -100,24 +134,5 @@ def t_newline(t):
     r'\n+'
     t.lexer.lineno += len(t.value)
     
-lexer = lex.lex()
-
-with open("pruebas/algorithm_gabriel.go", "r", encoding="utf-8") as archivo:
-    data = archivo.read()
-
-timestamp = datetime.now().strftime("%d-%m-%Y-%Hh%M")
-log_filename = f"logs/lexico-GabrielPelaez-{timestamp}.txt"
-
-lexer.input(data)
-
-with open(log_filename, "w", encoding="utf-8") as log:
-
-    while True:
-        tok = lexer.token()
-        if not tok:
-            break
-
-        line = f"[Line {tok.lineno}] {tok.type:<15} -> {tok.value}\n"
-        log.write(line)
-        print(line, end="")
-    
+def build_lexer():
+    return lex.lex()

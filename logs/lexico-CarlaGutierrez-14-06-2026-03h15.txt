@@ -1,0 +1,13 @@
+[Line 1] CONST           -> const
+[Line 2] VAR             -> var
+[Line 3] IF              -> if
+[Line 4] ELSE            -> else
+[Line 5] FOR             -> for
+[Line 6] SWITCH          -> switch
+[Line 7] CASE            -> case
+[Line 8] DEFAULT         -> default
+[Line 9] TRUE            -> true
+[Line 10] FALSE           -> false
+[Line 11] FUNC            -> func
+[Line 12] RETURN          -> return
+[Line 13] MAP             -> map
