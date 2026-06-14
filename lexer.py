@@ -168,6 +168,9 @@ def t_COMMENT_MULTI(t):
     t.lexer.lineno += t.value.count('\n')
     pass
 
+def t_UNCLOSED_STRING(t):
+    r'"[^"\n]*$'
+    print(f"Error léxico: cadena no cerrada en línea {t.lexer.lineno}")
 # =======================
 # MILENA PAZMIÑO CONTRIBUTION END
 # =======================
