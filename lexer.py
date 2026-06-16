@@ -83,11 +83,13 @@ reserved_words = {
     'string': 'STRING_TYPE',
     'bool': 'BOOL_TYPE',
     'range': 'RANGE',
+    'true': 'TRUE',
+    'false': 'FALSE',
 }
 
 tokens = tokens + list(reserved_words.values())
 
-def t_ID(t):
+def t_VARIABLE(t):
     r'[a-zA-Z_][a-zA-Z_0-9]*'
     t.type = reserved_words.get(t.value, 'VARIABLE')
     return t
@@ -170,7 +172,7 @@ def t_COMMENT_MULTI(t):
     pass
 
 def t_UNCLOSED_STRING(t):
-    r'"[^"\n]*$'
+    r'"[^"\n]*'
     print(f"Error léxico: cadena no cerrada en línea {t.lexer.lineno}")
     error_msg = f"[Line {t.lexer.lineno}] ERROR           -> {t.value[0]}"
     lexical_errors.append(error_msg)
