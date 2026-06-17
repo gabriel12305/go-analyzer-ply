@@ -6,7 +6,7 @@ def generate_log_filename(author_name="MilenaPazmiño"):
     os.makedirs("logs", exist_ok=True)
 
     timestamp = datetime.now().strftime("%d-%m-%Y-%Hh%M")
-    return f"logs/lexico-{author_name}-{timestamp}.txt"
+    return f"logs/sintactico-{author_name}-{timestamp}.txt"
 
 
 def log_tokens(lexer, data, log_filename):

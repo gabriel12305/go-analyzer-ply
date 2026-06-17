@@ -46,6 +46,7 @@ def p_statement(p):
               | print_stmt
               | for_stmt
               | function_decl
+              | slice_decl
     '''
     pass
 
@@ -108,9 +109,8 @@ def p_condition_logic(p):
     '''
     pass
 
-
 # =====================================
-# MILENA RULES
+# MILENA PAZMIÑO CONTRIBUTION START
 # =====================================
 
 # nombre := "Milena"
@@ -124,12 +124,12 @@ def p_short_var_decl(p):
 # fmt.Println(nombre)
 def p_print_stmt(p):
     '''
-    print_stmt : VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN
+    print_stmt : FMT DOT PRINTLN LPAREN expression RPAREN
     '''
     pass
 
 
-# for edad > 18 { }
+# Control Structure for edad > 18 { }
 def p_for_stmt(p):
     '''
     for_stmt : FOR condition LBRACE statements RBRACE
@@ -137,12 +137,51 @@ def p_for_stmt(p):
     pass
 
 
-# func suma() { }
+# function with return
 def p_function_decl(p):
     '''
-    function_decl : FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE
+    function_decl : FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
+                  | FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
+    '''
+
+def p_type(p):
+    '''
+    type : INT_TYPE
+         | FLOAT64_TYPE
+         | STRING_TYPE
+         | BOOL_TYPE
+    '''
+
+def p_return_stmt(p):
+    '''
+    return_stmt : RETURN expression
     '''
     pass
+
+# Data structure - Slice
+# nombres := []string or nombres := []string{} or nombres := []string{"Milena", "Carla"}
+def p_slice_decl(p):
+    '''
+    slice_decl : VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE
+               | VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+               | VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
+    '''
+    pass
+
+def p_string_list(p):
+    '''
+    string_list : STRING
+                | string_list COMMA STRING
+    '''
+    pass
+
+# =====================================
+# MILENA PAZMIÑO CONTRIBUTION END
+# =====================================
+
+
+
+
 
 
 # =====================================
@@ -157,6 +196,14 @@ def p_error(p):
         print(
             "Error sintáctico: fin de archivo inesperado"
         )
+
+
+
+# =====================================
+
+# =====================================
+
+
 
 
 # =====================================
@@ -177,5 +224,4 @@ while True:
         continue
 
     result = parser.parse(s, lexer=lexer)
-
     print("Entrada válida")

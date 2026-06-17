@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 func main() {
 
 	// Declaración de variables con tipos de datos
@@ -30,4 +32,47 @@ func main() {
 		mensaje := "Mayor de edad"
 	}
 
+	// =====================================================
+	// PRUEBAS SINTÁCTICAS - MILENA PAZMIÑO
+	// =====================================================
+
+	nombreUsuario := "Milena"
+	edadUsuario := 21
+	promedioUsuario := 9.8
+	activoUsuario := true
+
+	fmt.Println(nombreUsuario)
+	fmt.Println(edadUsuario)
+	fmt.Println(activoUsuario)
+
+	nombres := []string
+	nombresVacio := []string{}
+	companeras := []string{"Milena", "Carla"}
+
+	for edadUsuario > 18 {
+		adulto := true
+	}
+
+	suma := 5 + 3
+	resta := 10 - 2
+	multiplicacion := 4 * 6
+	division := 20 / 5
+	operacionCompleta := (5 + 3) * 2
+
+}
+
+func obtenerEdad() int {
+	return 21
+}
+
+func obtenerPromedio() float64 {
+	return 9.75
+}
+
+func obtenerNombre() string {
+	return "Milena"
+}
+
+func estaActivo() bool {
+	return true
 }

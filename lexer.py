@@ -83,8 +83,9 @@ reserved_words = {
     'string': 'STRING_TYPE',
     'bool': 'BOOL_TYPE',
     'range': 'RANGE',
-    'true': 'TRUE',
-    'false': 'FALSE',
+    'fmt': 'FMT',
+    'Println': 'PRINTLN',
+    
 }
 
 tokens = tokens + list(reserved_words.values())

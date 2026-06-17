@@ -3,27 +3,19 @@ Created by PLY version 3.11 (http://www.dabeaz.com/ply)
 Unused terminals:
 
     ASSIGN
-    BOOL_TYPE
     CASE
     COLON
-    COMMA
     CONST
     DEFAULT
     DIVIDE_ASSIGN
     ELSE
-    FLOAT64_TYPE
     IF
-    INT_TYPE
-    LBRACKET
     MAP
     MINUS_ASSIGN
     PACKAGE
     PLUS_ASSIGN
     RANGE
-    RBRACKET
-    RETURN
     SEMICOLON
-    STRING_TYPE
     SWITCH
     TIMES_ASSIGN
     VAR
@@ -38,100 +30,118 @@ Rule 4     statement -> short_var_decl
 Rule 5     statement -> print_stmt
 Rule 6     statement -> for_stmt
 Rule 7     statement -> function_decl
-Rule 8     expression -> expression PLUS expression
-Rule 9     expression -> expression MINUS expression
-Rule 10    expression -> expression TIMES expression
-Rule 11    expression -> expression DIVIDE expression
-Rule 12    expression -> expression MODULO expression
-Rule 13    expression -> LPAREN expression RPAREN
-Rule 14    expression -> INTEGER
-Rule 15    expression -> FLOAT
-Rule 16    expression -> STRING
-Rule 17    expression -> VARIABLE
-Rule 18    expression -> TRUE
-Rule 19    expression -> FALSE
-Rule 20    condition -> expression GT expression
-Rule 21    condition -> expression LT expression
-Rule 22    condition -> expression GE expression
-Rule 23    condition -> expression LE expression
-Rule 24    condition -> expression EQ expression
-Rule 25    condition -> expression NE expression
-Rule 26    condition -> condition AND condition
-Rule 27    condition -> condition OR condition
-Rule 28    condition -> NOT condition
-Rule 29    short_var_decl -> VARIABLE DECLARE_ASSIGN expression
-Rule 30    print_stmt -> VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN
-Rule 31    for_stmt -> FOR condition LBRACE statements RBRACE
-Rule 32    function_decl -> FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE
+Rule 8     statement -> slice_decl
+Rule 9     expression -> expression PLUS expression
+Rule 10    expression -> expression MINUS expression
+Rule 11    expression -> expression TIMES expression
+Rule 12    expression -> expression DIVIDE expression
+Rule 13    expression -> expression MODULO expression
+Rule 14    expression -> LPAREN expression RPAREN
+Rule 15    expression -> INTEGER
+Rule 16    expression -> FLOAT
+Rule 17    expression -> STRING
+Rule 18    expression -> VARIABLE
+Rule 19    expression -> TRUE
+Rule 20    expression -> FALSE
+Rule 21    condition -> expression GT expression
+Rule 22    condition -> expression LT expression
+Rule 23    condition -> expression GE expression
+Rule 24    condition -> expression LE expression
+Rule 25    condition -> expression EQ expression
+Rule 26    condition -> expression NE expression
+Rule 27    condition -> condition AND condition
+Rule 28    condition -> condition OR condition
+Rule 29    condition -> NOT condition
+Rule 30    short_var_decl -> VARIABLE DECLARE_ASSIGN expression
+Rule 31    print_stmt -> FMT DOT PRINTLN LPAREN expression RPAREN
+Rule 32    for_stmt -> FOR condition LBRACE statements RBRACE
+Rule 33    function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
+Rule 34    function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
+Rule 35    type -> INT_TYPE
+Rule 36    type -> FLOAT64_TYPE
+Rule 37    type -> STRING_TYPE
+Rule 38    type -> BOOL_TYPE
+Rule 39    return_stmt -> RETURN expression
+Rule 40    slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE
+Rule 41    slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+Rule 42    slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
+Rule 43    string_list -> STRING
+Rule 44    string_list -> string_list COMMA STRING
 
 Terminals, with rules where they appear
 
-AND                  : 26
+AND                  : 27
 ASSIGN               : 
-BOOL_TYPE            : 
+BOOL_TYPE            : 38
 CASE                 : 
 COLON                : 
-COMMA                : 
+COMMA                : 44
 CONST                : 
-DECLARE_ASSIGN       : 29
+DECLARE_ASSIGN       : 30 40 41 42
 DEFAULT              : 
-DIVIDE               : 11
+DIVIDE               : 12
 DIVIDE_ASSIGN        : 
-DOT                  : 30
+DOT                  : 31
 ELSE                 : 
-EQ                   : 24
-FALSE                : 19
-FLOAT                : 15
-FLOAT64_TYPE         : 
-FOR                  : 31
-FUNC                 : 32
-GE                   : 22
-GT                   : 20
+EQ                   : 25
+FALSE                : 20
+FLOAT                : 16
+FLOAT64_TYPE         : 36
+FMT                  : 31
+FOR                  : 32
+FUNC                 : 33 34
+GE                   : 23
+GT                   : 21
 IF                   : 
-INTEGER              : 14
-INT_TYPE             : 
-LBRACE               : 31 32
-LBRACKET             : 
-LE                   : 23
-LPAREN               : 13 30 32
-LT                   : 21
+INTEGER              : 15
+INT_TYPE             : 35
+LBRACE               : 32 33 34 41 42
+LBRACKET             : 40 41 42
+LE                   : 24
+LPAREN               : 14 31 33 34
+LT                   : 22
 MAP                  : 
-MINUS                : 9
+MINUS                : 10
 MINUS_ASSIGN         : 
-MODULO               : 12
-NE                   : 25
-NOT                  : 28
-OR                   : 27
+MODULO               : 13
+NE                   : 26
+NOT                  : 29
+OR                   : 28
 PACKAGE              : 
-PLUS                 : 8
+PLUS                 : 9
 PLUS_ASSIGN          : 
+PRINTLN              : 31
 RANGE                : 
-RBRACE               : 31 32
-RBRACKET             : 
-RETURN               : 
-RPAREN               : 13 30 32
+RBRACE               : 32 33 34 41 42
+RBRACKET             : 40 41 42
+RETURN               : 39
+RPAREN               : 14 31 33 34
 SEMICOLON            : 
-STRING               : 16
-STRING_TYPE          : 
+STRING               : 17 43 44
+STRING_TYPE          : 37 40 41 42
 SWITCH               : 
-TIMES                : 10
+TIMES                : 11
 TIMES_ASSIGN         : 
-TRUE                 : 18
+TRUE                 : 19
 VAR                  : 
-VARIABLE             : 17 29 30 30 30 32
+VARIABLE             : 18 30 33 34 40 41 42
 error                : 
 
 Nonterminals, with rules where they appear
 
-condition            : 26 26 27 27 28 31
-expression           : 8 8 9 9 10 10 11 11 12 12 13 20 20 21 21 22 22 23 23 24 24 25 25 29
+condition            : 27 27 28 28 29 32
+expression           : 9 9 10 10 11 11 12 12 13 13 14 21 21 22 22 23 23 24 24 25 25 26 26 30 31 39
 for_stmt             : 6
 function_decl        : 7
 print_stmt           : 5
 program              : 0
+return_stmt          : 33 34
 short_var_decl       : 4
+slice_decl           : 8
 statement            : 2 3
-statements           : 1 2 31 32
+statements           : 1 2 32 34
+string_list          : 42 44
+type                 : 33 34
 
 Parsing method: LALR
 
@@ -145,14 +155,20 @@ state 0
     (5) statement -> . print_stmt
     (6) statement -> . for_stmt
     (7) statement -> . function_decl
-    (29) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
-    (30) print_stmt -> . VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN
-    (31) for_stmt -> . FOR condition LBRACE statements RBRACE
-    (32) function_decl -> . FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE
+    (8) statement -> . slice_decl
+    (30) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
+    (31) print_stmt -> . FMT DOT PRINTLN LPAREN expression RPAREN
+    (32) for_stmt -> . FOR condition LBRACE statements RBRACE
+    (33) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
+    (34) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
+    (40) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE
+    (41) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+    (42) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
 
-    VARIABLE        shift and go to state 8
-    FOR             shift and go to state 9
-    FUNC            shift and go to state 10
+    VARIABLE        shift and go to state 9
+    FMT             shift and go to state 10
+    FOR             shift and go to state 11
+    FUNC            shift and go to state 12
 
     program                        shift and go to state 1
     statements                     shift and go to state 2
@@ -161,6 +177,7 @@ state 0
     print_stmt                     shift and go to state 5
     for_stmt                       shift and go to state 6
     function_decl                  shift and go to state 7
+    slice_decl                     shift and go to state 8
 
 state 1
 
@@ -176,31 +193,40 @@ state 2
     (5) statement -> . print_stmt
     (6) statement -> . for_stmt
     (7) statement -> . function_decl
-    (29) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
-    (30) print_stmt -> . VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN
-    (31) for_stmt -> . FOR condition LBRACE statements RBRACE
-    (32) function_decl -> . FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE
+    (8) statement -> . slice_decl
+    (30) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
+    (31) print_stmt -> . FMT DOT PRINTLN LPAREN expression RPAREN
+    (32) for_stmt -> . FOR condition LBRACE statements RBRACE
+    (33) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
+    (34) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
+    (40) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE
+    (41) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+    (42) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
 
     $end            reduce using rule 1 (program -> statements .)
-    VARIABLE        shift and go to state 8
-    FOR             shift and go to state 9
-    FUNC            shift and go to state 10
+    VARIABLE        shift and go to state 9
+    FMT             shift and go to state 10
+    FOR             shift and go to state 11
+    FUNC            shift and go to state 12
 
-    statement                      shift and go to state 11
+    statement                      shift and go to state 13
     short_var_decl                 shift and go to state 4
     print_stmt                     shift and go to state 5
     for_stmt                       shift and go to state 6
     function_decl                  shift and go to state 7
+    slice_decl                     shift and go to state 8
 
 state 3
 
     (3) statements -> statement .
 
     VARIABLE        reduce using rule 3 (statements -> statement .)
+    FMT             reduce using rule 3 (statements -> statement .)
     FOR             reduce using rule 3 (statements -> statement .)
     FUNC            reduce using rule 3 (statements -> statement .)
     $end            reduce using rule 3 (statements -> statement .)
     RBRACE          reduce using rule 3 (statements -> statement .)
+    RETURN          reduce using rule 3 (statements -> statement .)
 
 
 state 4
@@ -208,10 +234,12 @@ state 4
     (4) statement -> short_var_decl .
 
     VARIABLE        reduce using rule 4 (statement -> short_var_decl .)
+    FMT             reduce using rule 4 (statement -> short_var_decl .)
     FOR             reduce using rule 4 (statement -> short_var_decl .)
     FUNC            reduce using rule 4 (statement -> short_var_decl .)
     $end            reduce using rule 4 (statement -> short_var_decl .)
     RBRACE          reduce using rule 4 (statement -> short_var_decl .)
+    RETURN          reduce using rule 4 (statement -> short_var_decl .)
 
 
 state 5
@@ -219,10 +247,12 @@ state 5
     (5) statement -> print_stmt .
 
     VARIABLE        reduce using rule 5 (statement -> print_stmt .)
+    FMT             reduce using rule 5 (statement -> print_stmt .)
     FOR             reduce using rule 5 (statement -> print_stmt .)
     FUNC            reduce using rule 5 (statement -> print_stmt .)
     $end            reduce using rule 5 (statement -> print_stmt .)
     RBRACE          reduce using rule 5 (statement -> print_stmt .)
+    RETURN          reduce using rule 5 (statement -> print_stmt .)
 
 
 state 6
@@ -230,10 +260,12 @@ state 6
     (6) statement -> for_stmt .
 
     VARIABLE        reduce using rule 6 (statement -> for_stmt .)
+    FMT             reduce using rule 6 (statement -> for_stmt .)
     FOR             reduce using rule 6 (statement -> for_stmt .)
     FUNC            reduce using rule 6 (statement -> for_stmt .)
     $end            reduce using rule 6 (statement -> for_stmt .)
     RBRACE          reduce using rule 6 (statement -> for_stmt .)
+    RETURN          reduce using rule 6 (statement -> for_stmt .)
 
 
 state 7
@@ -241,1300 +273,1646 @@ state 7
     (7) statement -> function_decl .
 
     VARIABLE        reduce using rule 7 (statement -> function_decl .)
+    FMT             reduce using rule 7 (statement -> function_decl .)
     FOR             reduce using rule 7 (statement -> function_decl .)
     FUNC            reduce using rule 7 (statement -> function_decl .)
     $end            reduce using rule 7 (statement -> function_decl .)
     RBRACE          reduce using rule 7 (statement -> function_decl .)
+    RETURN          reduce using rule 7 (statement -> function_decl .)
 
 
 state 8
 
-    (29) short_var_decl -> VARIABLE . DECLARE_ASSIGN expression
-    (30) print_stmt -> VARIABLE . DOT VARIABLE LPAREN VARIABLE RPAREN
+    (8) statement -> slice_decl .
 
-    DECLARE_ASSIGN  shift and go to state 12
-    DOT             shift and go to state 13
+    VARIABLE        reduce using rule 8 (statement -> slice_decl .)
+    FMT             reduce using rule 8 (statement -> slice_decl .)
+    FOR             reduce using rule 8 (statement -> slice_decl .)
+    FUNC            reduce using rule 8 (statement -> slice_decl .)
+    $end            reduce using rule 8 (statement -> slice_decl .)
+    RBRACE          reduce using rule 8 (statement -> slice_decl .)
+    RETURN          reduce using rule 8 (statement -> slice_decl .)
 
 
 state 9
 
-    (31) for_stmt -> FOR . condition LBRACE statements RBRACE
-    (20) condition -> . expression GT expression
-    (21) condition -> . expression LT expression
-    (22) condition -> . expression GE expression
-    (23) condition -> . expression LE expression
-    (24) condition -> . expression EQ expression
-    (25) condition -> . expression NE expression
-    (26) condition -> . condition AND condition
-    (27) condition -> . condition OR condition
-    (28) condition -> . NOT condition
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (30) short_var_decl -> VARIABLE . DECLARE_ASSIGN expression
+    (40) slice_decl -> VARIABLE . DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE
+    (41) slice_decl -> VARIABLE . DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+    (42) slice_decl -> VARIABLE . DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
 
-    NOT             shift and go to state 16
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    DECLARE_ASSIGN  shift and go to state 14
 
-    condition                      shift and go to state 14
-    expression                     shift and go to state 15
 
 state 10
 
-    (32) function_decl -> FUNC . VARIABLE LPAREN RPAREN LBRACE statements RBRACE
+    (31) print_stmt -> FMT . DOT PRINTLN LPAREN expression RPAREN
 
-    VARIABLE        shift and go to state 24
+    DOT             shift and go to state 15
 
 
 state 11
 
-    (2) statements -> statements statement .
+    (32) for_stmt -> FOR . condition LBRACE statements RBRACE
+    (21) condition -> . expression GT expression
+    (22) condition -> . expression LT expression
+    (23) condition -> . expression GE expression
+    (24) condition -> . expression LE expression
+    (25) condition -> . expression EQ expression
+    (26) condition -> . expression NE expression
+    (27) condition -> . condition AND condition
+    (28) condition -> . condition OR condition
+    (29) condition -> . NOT condition
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    VARIABLE        reduce using rule 2 (statements -> statements statement .)
-    FOR             reduce using rule 2 (statements -> statements statement .)
-    FUNC            reduce using rule 2 (statements -> statements statement .)
-    $end            reduce using rule 2 (statements -> statements statement .)
-    RBRACE          reduce using rule 2 (statements -> statements statement .)
+    NOT             shift and go to state 18
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
+    condition                      shift and go to state 16
+    expression                     shift and go to state 17
 
 state 12
 
-    (29) short_var_decl -> VARIABLE DECLARE_ASSIGN . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
-
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
-
-    expression                     shift and go to state 25
-
-state 13
-
-    (30) print_stmt -> VARIABLE DOT . VARIABLE LPAREN VARIABLE RPAREN
+    (33) function_decl -> FUNC . VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
+    (34) function_decl -> FUNC . VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
 
     VARIABLE        shift and go to state 26
 
 
+state 13
+
+    (2) statements -> statements statement .
+
+    VARIABLE        reduce using rule 2 (statements -> statements statement .)
+    FMT             reduce using rule 2 (statements -> statements statement .)
+    FOR             reduce using rule 2 (statements -> statements statement .)
+    FUNC            reduce using rule 2 (statements -> statements statement .)
+    $end            reduce using rule 2 (statements -> statements statement .)
+    RBRACE          reduce using rule 2 (statements -> statements statement .)
+    RETURN          reduce using rule 2 (statements -> statements statement .)
+
+
 state 14
 
-    (31) for_stmt -> FOR condition . LBRACE statements RBRACE
-    (26) condition -> condition . AND condition
-    (27) condition -> condition . OR condition
+    (30) short_var_decl -> VARIABLE DECLARE_ASSIGN . expression
+    (40) slice_decl -> VARIABLE DECLARE_ASSIGN . LBRACKET RBRACKET STRING_TYPE
+    (41) slice_decl -> VARIABLE DECLARE_ASSIGN . LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+    (42) slice_decl -> VARIABLE DECLARE_ASSIGN . LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LBRACE          shift and go to state 27
-    AND             shift and go to state 28
-    OR              shift and go to state 29
+    LBRACKET        shift and go to state 28
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
+    expression                     shift and go to state 27
 
 state 15
 
-    (20) condition -> expression . GT expression
-    (21) condition -> expression . LT expression
-    (22) condition -> expression . GE expression
-    (23) condition -> expression . LE expression
-    (24) condition -> expression . EQ expression
-    (25) condition -> expression . NE expression
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (31) print_stmt -> FMT DOT . PRINTLN LPAREN expression RPAREN
 
-    GT              shift and go to state 30
-    LT              shift and go to state 31
-    GE              shift and go to state 32
-    LE              shift and go to state 33
-    EQ              shift and go to state 34
-    NE              shift and go to state 35
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
+    PRINTLN         shift and go to state 29
 
 
 state 16
 
-    (28) condition -> NOT . condition
-    (20) condition -> . expression GT expression
-    (21) condition -> . expression LT expression
-    (22) condition -> . expression GE expression
-    (23) condition -> . expression LE expression
-    (24) condition -> . expression EQ expression
-    (25) condition -> . expression NE expression
-    (26) condition -> . condition AND condition
-    (27) condition -> . condition OR condition
-    (28) condition -> . NOT condition
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (32) for_stmt -> FOR condition . LBRACE statements RBRACE
+    (27) condition -> condition . AND condition
+    (28) condition -> condition . OR condition
 
-    NOT             shift and go to state 16
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    LBRACE          shift and go to state 30
+    AND             shift and go to state 31
+    OR              shift and go to state 32
 
-    condition                      shift and go to state 41
-    expression                     shift and go to state 15
 
 state 17
 
-    (13) expression -> LPAREN . expression RPAREN
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (21) condition -> expression . GT expression
+    (22) condition -> expression . LT expression
+    (23) condition -> expression . GE expression
+    (24) condition -> expression . LE expression
+    (25) condition -> expression . EQ expression
+    (26) condition -> expression . NE expression
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    GT              shift and go to state 33
+    LT              shift and go to state 34
+    GE              shift and go to state 35
+    LE              shift and go to state 36
+    EQ              shift and go to state 37
+    NE              shift and go to state 38
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
 
-    expression                     shift and go to state 42
 
 state 18
 
-    (14) expression -> INTEGER .
+    (29) condition -> NOT . condition
+    (21) condition -> . expression GT expression
+    (22) condition -> . expression LT expression
+    (23) condition -> . expression GE expression
+    (24) condition -> . expression LE expression
+    (25) condition -> . expression EQ expression
+    (26) condition -> . expression NE expression
+    (27) condition -> . condition AND condition
+    (28) condition -> . condition OR condition
+    (29) condition -> . NOT condition
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    GT              reduce using rule 14 (expression -> INTEGER .)
-    LT              reduce using rule 14 (expression -> INTEGER .)
-    GE              reduce using rule 14 (expression -> INTEGER .)
-    LE              reduce using rule 14 (expression -> INTEGER .)
-    EQ              reduce using rule 14 (expression -> INTEGER .)
-    NE              reduce using rule 14 (expression -> INTEGER .)
-    PLUS            reduce using rule 14 (expression -> INTEGER .)
-    MINUS           reduce using rule 14 (expression -> INTEGER .)
-    TIMES           reduce using rule 14 (expression -> INTEGER .)
-    DIVIDE          reduce using rule 14 (expression -> INTEGER .)
-    MODULO          reduce using rule 14 (expression -> INTEGER .)
-    VARIABLE        reduce using rule 14 (expression -> INTEGER .)
-    FOR             reduce using rule 14 (expression -> INTEGER .)
-    FUNC            reduce using rule 14 (expression -> INTEGER .)
-    $end            reduce using rule 14 (expression -> INTEGER .)
-    RBRACE          reduce using rule 14 (expression -> INTEGER .)
-    RPAREN          reduce using rule 14 (expression -> INTEGER .)
-    LBRACE          reduce using rule 14 (expression -> INTEGER .)
-    AND             reduce using rule 14 (expression -> INTEGER .)
-    OR              reduce using rule 14 (expression -> INTEGER .)
+    NOT             shift and go to state 18
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
+    condition                      shift and go to state 44
+    expression                     shift and go to state 17
 
 state 19
 
-    (15) expression -> FLOAT .
+    (14) expression -> LPAREN . expression RPAREN
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    GT              reduce using rule 15 (expression -> FLOAT .)
-    LT              reduce using rule 15 (expression -> FLOAT .)
-    GE              reduce using rule 15 (expression -> FLOAT .)
-    LE              reduce using rule 15 (expression -> FLOAT .)
-    EQ              reduce using rule 15 (expression -> FLOAT .)
-    NE              reduce using rule 15 (expression -> FLOAT .)
-    PLUS            reduce using rule 15 (expression -> FLOAT .)
-    MINUS           reduce using rule 15 (expression -> FLOAT .)
-    TIMES           reduce using rule 15 (expression -> FLOAT .)
-    DIVIDE          reduce using rule 15 (expression -> FLOAT .)
-    MODULO          reduce using rule 15 (expression -> FLOAT .)
-    VARIABLE        reduce using rule 15 (expression -> FLOAT .)
-    FOR             reduce using rule 15 (expression -> FLOAT .)
-    FUNC            reduce using rule 15 (expression -> FLOAT .)
-    $end            reduce using rule 15 (expression -> FLOAT .)
-    RBRACE          reduce using rule 15 (expression -> FLOAT .)
-    RPAREN          reduce using rule 15 (expression -> FLOAT .)
-    LBRACE          reduce using rule 15 (expression -> FLOAT .)
-    AND             reduce using rule 15 (expression -> FLOAT .)
-    OR              reduce using rule 15 (expression -> FLOAT .)
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
+    expression                     shift and go to state 45
 
 state 20
 
-    (16) expression -> STRING .
+    (15) expression -> INTEGER .
 
-    GT              reduce using rule 16 (expression -> STRING .)
-    LT              reduce using rule 16 (expression -> STRING .)
-    GE              reduce using rule 16 (expression -> STRING .)
-    LE              reduce using rule 16 (expression -> STRING .)
-    EQ              reduce using rule 16 (expression -> STRING .)
-    NE              reduce using rule 16 (expression -> STRING .)
-    PLUS            reduce using rule 16 (expression -> STRING .)
-    MINUS           reduce using rule 16 (expression -> STRING .)
-    TIMES           reduce using rule 16 (expression -> STRING .)
-    DIVIDE          reduce using rule 16 (expression -> STRING .)
-    MODULO          reduce using rule 16 (expression -> STRING .)
-    VARIABLE        reduce using rule 16 (expression -> STRING .)
-    FOR             reduce using rule 16 (expression -> STRING .)
-    FUNC            reduce using rule 16 (expression -> STRING .)
-    $end            reduce using rule 16 (expression -> STRING .)
-    RBRACE          reduce using rule 16 (expression -> STRING .)
-    RPAREN          reduce using rule 16 (expression -> STRING .)
-    LBRACE          reduce using rule 16 (expression -> STRING .)
-    AND             reduce using rule 16 (expression -> STRING .)
-    OR              reduce using rule 16 (expression -> STRING .)
+    GT              reduce using rule 15 (expression -> INTEGER .)
+    LT              reduce using rule 15 (expression -> INTEGER .)
+    GE              reduce using rule 15 (expression -> INTEGER .)
+    LE              reduce using rule 15 (expression -> INTEGER .)
+    EQ              reduce using rule 15 (expression -> INTEGER .)
+    NE              reduce using rule 15 (expression -> INTEGER .)
+    PLUS            reduce using rule 15 (expression -> INTEGER .)
+    MINUS           reduce using rule 15 (expression -> INTEGER .)
+    TIMES           reduce using rule 15 (expression -> INTEGER .)
+    DIVIDE          reduce using rule 15 (expression -> INTEGER .)
+    MODULO          reduce using rule 15 (expression -> INTEGER .)
+    VARIABLE        reduce using rule 15 (expression -> INTEGER .)
+    FMT             reduce using rule 15 (expression -> INTEGER .)
+    FOR             reduce using rule 15 (expression -> INTEGER .)
+    FUNC            reduce using rule 15 (expression -> INTEGER .)
+    $end            reduce using rule 15 (expression -> INTEGER .)
+    RBRACE          reduce using rule 15 (expression -> INTEGER .)
+    RETURN          reduce using rule 15 (expression -> INTEGER .)
+    RPAREN          reduce using rule 15 (expression -> INTEGER .)
+    LBRACE          reduce using rule 15 (expression -> INTEGER .)
+    AND             reduce using rule 15 (expression -> INTEGER .)
+    OR              reduce using rule 15 (expression -> INTEGER .)
 
 
 state 21
 
-    (17) expression -> VARIABLE .
+    (16) expression -> FLOAT .
 
-    GT              reduce using rule 17 (expression -> VARIABLE .)
-    LT              reduce using rule 17 (expression -> VARIABLE .)
-    GE              reduce using rule 17 (expression -> VARIABLE .)
-    LE              reduce using rule 17 (expression -> VARIABLE .)
-    EQ              reduce using rule 17 (expression -> VARIABLE .)
-    NE              reduce using rule 17 (expression -> VARIABLE .)
-    PLUS            reduce using rule 17 (expression -> VARIABLE .)
-    MINUS           reduce using rule 17 (expression -> VARIABLE .)
-    TIMES           reduce using rule 17 (expression -> VARIABLE .)
-    DIVIDE          reduce using rule 17 (expression -> VARIABLE .)
-    MODULO          reduce using rule 17 (expression -> VARIABLE .)
-    VARIABLE        reduce using rule 17 (expression -> VARIABLE .)
-    FOR             reduce using rule 17 (expression -> VARIABLE .)
-    FUNC            reduce using rule 17 (expression -> VARIABLE .)
-    $end            reduce using rule 17 (expression -> VARIABLE .)
-    RBRACE          reduce using rule 17 (expression -> VARIABLE .)
-    RPAREN          reduce using rule 17 (expression -> VARIABLE .)
-    LBRACE          reduce using rule 17 (expression -> VARIABLE .)
-    AND             reduce using rule 17 (expression -> VARIABLE .)
-    OR              reduce using rule 17 (expression -> VARIABLE .)
+    GT              reduce using rule 16 (expression -> FLOAT .)
+    LT              reduce using rule 16 (expression -> FLOAT .)
+    GE              reduce using rule 16 (expression -> FLOAT .)
+    LE              reduce using rule 16 (expression -> FLOAT .)
+    EQ              reduce using rule 16 (expression -> FLOAT .)
+    NE              reduce using rule 16 (expression -> FLOAT .)
+    PLUS            reduce using rule 16 (expression -> FLOAT .)
+    MINUS           reduce using rule 16 (expression -> FLOAT .)
+    TIMES           reduce using rule 16 (expression -> FLOAT .)
+    DIVIDE          reduce using rule 16 (expression -> FLOAT .)
+    MODULO          reduce using rule 16 (expression -> FLOAT .)
+    VARIABLE        reduce using rule 16 (expression -> FLOAT .)
+    FMT             reduce using rule 16 (expression -> FLOAT .)
+    FOR             reduce using rule 16 (expression -> FLOAT .)
+    FUNC            reduce using rule 16 (expression -> FLOAT .)
+    $end            reduce using rule 16 (expression -> FLOAT .)
+    RBRACE          reduce using rule 16 (expression -> FLOAT .)
+    RETURN          reduce using rule 16 (expression -> FLOAT .)
+    RPAREN          reduce using rule 16 (expression -> FLOAT .)
+    LBRACE          reduce using rule 16 (expression -> FLOAT .)
+    AND             reduce using rule 16 (expression -> FLOAT .)
+    OR              reduce using rule 16 (expression -> FLOAT .)
 
 
 state 22
 
-    (18) expression -> TRUE .
+    (17) expression -> STRING .
 
-    GT              reduce using rule 18 (expression -> TRUE .)
-    LT              reduce using rule 18 (expression -> TRUE .)
-    GE              reduce using rule 18 (expression -> TRUE .)
-    LE              reduce using rule 18 (expression -> TRUE .)
-    EQ              reduce using rule 18 (expression -> TRUE .)
-    NE              reduce using rule 18 (expression -> TRUE .)
-    PLUS            reduce using rule 18 (expression -> TRUE .)
-    MINUS           reduce using rule 18 (expression -> TRUE .)
-    TIMES           reduce using rule 18 (expression -> TRUE .)
-    DIVIDE          reduce using rule 18 (expression -> TRUE .)
-    MODULO          reduce using rule 18 (expression -> TRUE .)
-    VARIABLE        reduce using rule 18 (expression -> TRUE .)
-    FOR             reduce using rule 18 (expression -> TRUE .)
-    FUNC            reduce using rule 18 (expression -> TRUE .)
-    $end            reduce using rule 18 (expression -> TRUE .)
-    RBRACE          reduce using rule 18 (expression -> TRUE .)
-    RPAREN          reduce using rule 18 (expression -> TRUE .)
-    LBRACE          reduce using rule 18 (expression -> TRUE .)
-    AND             reduce using rule 18 (expression -> TRUE .)
-    OR              reduce using rule 18 (expression -> TRUE .)
+    GT              reduce using rule 17 (expression -> STRING .)
+    LT              reduce using rule 17 (expression -> STRING .)
+    GE              reduce using rule 17 (expression -> STRING .)
+    LE              reduce using rule 17 (expression -> STRING .)
+    EQ              reduce using rule 17 (expression -> STRING .)
+    NE              reduce using rule 17 (expression -> STRING .)
+    PLUS            reduce using rule 17 (expression -> STRING .)
+    MINUS           reduce using rule 17 (expression -> STRING .)
+    TIMES           reduce using rule 17 (expression -> STRING .)
+    DIVIDE          reduce using rule 17 (expression -> STRING .)
+    MODULO          reduce using rule 17 (expression -> STRING .)
+    VARIABLE        reduce using rule 17 (expression -> STRING .)
+    FMT             reduce using rule 17 (expression -> STRING .)
+    FOR             reduce using rule 17 (expression -> STRING .)
+    FUNC            reduce using rule 17 (expression -> STRING .)
+    $end            reduce using rule 17 (expression -> STRING .)
+    RBRACE          reduce using rule 17 (expression -> STRING .)
+    RETURN          reduce using rule 17 (expression -> STRING .)
+    RPAREN          reduce using rule 17 (expression -> STRING .)
+    LBRACE          reduce using rule 17 (expression -> STRING .)
+    AND             reduce using rule 17 (expression -> STRING .)
+    OR              reduce using rule 17 (expression -> STRING .)
 
 
 state 23
 
-    (19) expression -> FALSE .
+    (18) expression -> VARIABLE .
 
-    GT              reduce using rule 19 (expression -> FALSE .)
-    LT              reduce using rule 19 (expression -> FALSE .)
-    GE              reduce using rule 19 (expression -> FALSE .)
-    LE              reduce using rule 19 (expression -> FALSE .)
-    EQ              reduce using rule 19 (expression -> FALSE .)
-    NE              reduce using rule 19 (expression -> FALSE .)
-    PLUS            reduce using rule 19 (expression -> FALSE .)
-    MINUS           reduce using rule 19 (expression -> FALSE .)
-    TIMES           reduce using rule 19 (expression -> FALSE .)
-    DIVIDE          reduce using rule 19 (expression -> FALSE .)
-    MODULO          reduce using rule 19 (expression -> FALSE .)
-    VARIABLE        reduce using rule 19 (expression -> FALSE .)
-    FOR             reduce using rule 19 (expression -> FALSE .)
-    FUNC            reduce using rule 19 (expression -> FALSE .)
-    $end            reduce using rule 19 (expression -> FALSE .)
-    RBRACE          reduce using rule 19 (expression -> FALSE .)
-    RPAREN          reduce using rule 19 (expression -> FALSE .)
-    LBRACE          reduce using rule 19 (expression -> FALSE .)
-    AND             reduce using rule 19 (expression -> FALSE .)
-    OR              reduce using rule 19 (expression -> FALSE .)
+    GT              reduce using rule 18 (expression -> VARIABLE .)
+    LT              reduce using rule 18 (expression -> VARIABLE .)
+    GE              reduce using rule 18 (expression -> VARIABLE .)
+    LE              reduce using rule 18 (expression -> VARIABLE .)
+    EQ              reduce using rule 18 (expression -> VARIABLE .)
+    NE              reduce using rule 18 (expression -> VARIABLE .)
+    PLUS            reduce using rule 18 (expression -> VARIABLE .)
+    MINUS           reduce using rule 18 (expression -> VARIABLE .)
+    TIMES           reduce using rule 18 (expression -> VARIABLE .)
+    DIVIDE          reduce using rule 18 (expression -> VARIABLE .)
+    MODULO          reduce using rule 18 (expression -> VARIABLE .)
+    VARIABLE        reduce using rule 18 (expression -> VARIABLE .)
+    FMT             reduce using rule 18 (expression -> VARIABLE .)
+    FOR             reduce using rule 18 (expression -> VARIABLE .)
+    FUNC            reduce using rule 18 (expression -> VARIABLE .)
+    $end            reduce using rule 18 (expression -> VARIABLE .)
+    RBRACE          reduce using rule 18 (expression -> VARIABLE .)
+    RETURN          reduce using rule 18 (expression -> VARIABLE .)
+    RPAREN          reduce using rule 18 (expression -> VARIABLE .)
+    LBRACE          reduce using rule 18 (expression -> VARIABLE .)
+    AND             reduce using rule 18 (expression -> VARIABLE .)
+    OR              reduce using rule 18 (expression -> VARIABLE .)
 
 
 state 24
 
-    (32) function_decl -> FUNC VARIABLE . LPAREN RPAREN LBRACE statements RBRACE
+    (19) expression -> TRUE .
 
-    LPAREN          shift and go to state 43
+    GT              reduce using rule 19 (expression -> TRUE .)
+    LT              reduce using rule 19 (expression -> TRUE .)
+    GE              reduce using rule 19 (expression -> TRUE .)
+    LE              reduce using rule 19 (expression -> TRUE .)
+    EQ              reduce using rule 19 (expression -> TRUE .)
+    NE              reduce using rule 19 (expression -> TRUE .)
+    PLUS            reduce using rule 19 (expression -> TRUE .)
+    MINUS           reduce using rule 19 (expression -> TRUE .)
+    TIMES           reduce using rule 19 (expression -> TRUE .)
+    DIVIDE          reduce using rule 19 (expression -> TRUE .)
+    MODULO          reduce using rule 19 (expression -> TRUE .)
+    VARIABLE        reduce using rule 19 (expression -> TRUE .)
+    FMT             reduce using rule 19 (expression -> TRUE .)
+    FOR             reduce using rule 19 (expression -> TRUE .)
+    FUNC            reduce using rule 19 (expression -> TRUE .)
+    $end            reduce using rule 19 (expression -> TRUE .)
+    RBRACE          reduce using rule 19 (expression -> TRUE .)
+    RETURN          reduce using rule 19 (expression -> TRUE .)
+    RPAREN          reduce using rule 19 (expression -> TRUE .)
+    LBRACE          reduce using rule 19 (expression -> TRUE .)
+    AND             reduce using rule 19 (expression -> TRUE .)
+    OR              reduce using rule 19 (expression -> TRUE .)
 
 
 state 25
 
-    (29) short_var_decl -> VARIABLE DECLARE_ASSIGN expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (20) expression -> FALSE .
 
-    VARIABLE        reduce using rule 29 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
-    FOR             reduce using rule 29 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
-    FUNC            reduce using rule 29 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
-    $end            reduce using rule 29 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
-    RBRACE          reduce using rule 29 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
+    GT              reduce using rule 20 (expression -> FALSE .)
+    LT              reduce using rule 20 (expression -> FALSE .)
+    GE              reduce using rule 20 (expression -> FALSE .)
+    LE              reduce using rule 20 (expression -> FALSE .)
+    EQ              reduce using rule 20 (expression -> FALSE .)
+    NE              reduce using rule 20 (expression -> FALSE .)
+    PLUS            reduce using rule 20 (expression -> FALSE .)
+    MINUS           reduce using rule 20 (expression -> FALSE .)
+    TIMES           reduce using rule 20 (expression -> FALSE .)
+    DIVIDE          reduce using rule 20 (expression -> FALSE .)
+    MODULO          reduce using rule 20 (expression -> FALSE .)
+    VARIABLE        reduce using rule 20 (expression -> FALSE .)
+    FMT             reduce using rule 20 (expression -> FALSE .)
+    FOR             reduce using rule 20 (expression -> FALSE .)
+    FUNC            reduce using rule 20 (expression -> FALSE .)
+    $end            reduce using rule 20 (expression -> FALSE .)
+    RBRACE          reduce using rule 20 (expression -> FALSE .)
+    RETURN          reduce using rule 20 (expression -> FALSE .)
+    RPAREN          reduce using rule 20 (expression -> FALSE .)
+    LBRACE          reduce using rule 20 (expression -> FALSE .)
+    AND             reduce using rule 20 (expression -> FALSE .)
+    OR              reduce using rule 20 (expression -> FALSE .)
 
 
 state 26
 
-    (30) print_stmt -> VARIABLE DOT VARIABLE . LPAREN VARIABLE RPAREN
+    (33) function_decl -> FUNC VARIABLE . LPAREN RPAREN type LBRACE return_stmt RBRACE
+    (34) function_decl -> FUNC VARIABLE . LPAREN RPAREN type LBRACE statements return_stmt RBRACE
 
-    LPAREN          shift and go to state 44
+    LPAREN          shift and go to state 46
 
 
 state 27
 
-    (31) for_stmt -> FOR condition LBRACE . statements RBRACE
+    (30) short_var_decl -> VARIABLE DECLARE_ASSIGN expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
+
+    VARIABLE        reduce using rule 30 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
+    FMT             reduce using rule 30 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
+    FOR             reduce using rule 30 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
+    FUNC            reduce using rule 30 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
+    $end            reduce using rule 30 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
+    RBRACE          reduce using rule 30 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
+    RETURN          reduce using rule 30 (short_var_decl -> VARIABLE DECLARE_ASSIGN expression .)
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
+
+
+state 28
+
+    (40) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET . RBRACKET STRING_TYPE
+    (41) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET . RBRACKET STRING_TYPE LBRACE RBRACE
+    (42) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET . RBRACKET STRING_TYPE LBRACE string_list RBRACE
+
+    RBRACKET        shift and go to state 47
+
+
+state 29
+
+    (31) print_stmt -> FMT DOT PRINTLN . LPAREN expression RPAREN
+
+    LPAREN          shift and go to state 48
+
+
+state 30
+
+    (32) for_stmt -> FOR condition LBRACE . statements RBRACE
     (2) statements -> . statements statement
     (3) statements -> . statement
     (4) statement -> . short_var_decl
     (5) statement -> . print_stmt
     (6) statement -> . for_stmt
     (7) statement -> . function_decl
-    (29) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
-    (30) print_stmt -> . VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN
-    (31) for_stmt -> . FOR condition LBRACE statements RBRACE
-    (32) function_decl -> . FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE
+    (8) statement -> . slice_decl
+    (30) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
+    (31) print_stmt -> . FMT DOT PRINTLN LPAREN expression RPAREN
+    (32) for_stmt -> . FOR condition LBRACE statements RBRACE
+    (33) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
+    (34) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
+    (40) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE
+    (41) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+    (42) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
 
-    VARIABLE        shift and go to state 8
-    FOR             shift and go to state 9
-    FUNC            shift and go to state 10
+    VARIABLE        shift and go to state 9
+    FMT             shift and go to state 10
+    FOR             shift and go to state 11
+    FUNC            shift and go to state 12
 
-    statements                     shift and go to state 45
+    statements                     shift and go to state 49
     statement                      shift and go to state 3
     short_var_decl                 shift and go to state 4
     print_stmt                     shift and go to state 5
     for_stmt                       shift and go to state 6
     function_decl                  shift and go to state 7
-
-state 28
-
-    (26) condition -> condition AND . condition
-    (20) condition -> . expression GT expression
-    (21) condition -> . expression LT expression
-    (22) condition -> . expression GE expression
-    (23) condition -> . expression LE expression
-    (24) condition -> . expression EQ expression
-    (25) condition -> . expression NE expression
-    (26) condition -> . condition AND condition
-    (27) condition -> . condition OR condition
-    (28) condition -> . NOT condition
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
-
-    NOT             shift and go to state 16
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
-
-    condition                      shift and go to state 46
-    expression                     shift and go to state 15
-
-state 29
-
-    (27) condition -> condition OR . condition
-    (20) condition -> . expression GT expression
-    (21) condition -> . expression LT expression
-    (22) condition -> . expression GE expression
-    (23) condition -> . expression LE expression
-    (24) condition -> . expression EQ expression
-    (25) condition -> . expression NE expression
-    (26) condition -> . condition AND condition
-    (27) condition -> . condition OR condition
-    (28) condition -> . NOT condition
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
-
-    NOT             shift and go to state 16
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
-
-    condition                      shift and go to state 47
-    expression                     shift and go to state 15
-
-state 30
-
-    (20) condition -> expression GT . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
-
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
-
-    expression                     shift and go to state 48
+    slice_decl                     shift and go to state 8
 
 state 31
 
-    (21) condition -> expression LT . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (27) condition -> condition AND . condition
+    (21) condition -> . expression GT expression
+    (22) condition -> . expression LT expression
+    (23) condition -> . expression GE expression
+    (24) condition -> . expression LE expression
+    (25) condition -> . expression EQ expression
+    (26) condition -> . expression NE expression
+    (27) condition -> . condition AND condition
+    (28) condition -> . condition OR condition
+    (29) condition -> . NOT condition
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    NOT             shift and go to state 18
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
-    expression                     shift and go to state 49
+    condition                      shift and go to state 50
+    expression                     shift and go to state 17
 
 state 32
 
-    (22) condition -> expression GE . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (28) condition -> condition OR . condition
+    (21) condition -> . expression GT expression
+    (22) condition -> . expression LT expression
+    (23) condition -> . expression GE expression
+    (24) condition -> . expression LE expression
+    (25) condition -> . expression EQ expression
+    (26) condition -> . expression NE expression
+    (27) condition -> . condition AND condition
+    (28) condition -> . condition OR condition
+    (29) condition -> . NOT condition
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    NOT             shift and go to state 18
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
-    expression                     shift and go to state 50
+    condition                      shift and go to state 51
+    expression                     shift and go to state 17
 
 state 33
 
-    (23) condition -> expression LE . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (21) condition -> expression GT . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
-
-    expression                     shift and go to state 51
-
-state 34
-
-    (24) condition -> expression EQ . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
-
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
     expression                     shift and go to state 52
 
-state 35
+state 34
 
-    (25) condition -> expression NE . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (22) condition -> expression LT . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
     expression                     shift and go to state 53
 
-state 36
+state 35
 
-    (8) expression -> expression PLUS . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (23) condition -> expression GE . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
     expression                     shift and go to state 54
 
-state 37
+state 36
 
-    (9) expression -> expression MINUS . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (24) condition -> expression LE . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
     expression                     shift and go to state 55
 
-state 38
+state 37
 
-    (10) expression -> expression TIMES . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (25) condition -> expression EQ . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
     expression                     shift and go to state 56
 
-state 39
+state 38
 
-    (11) expression -> expression DIVIDE . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (26) condition -> expression NE . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
     expression                     shift and go to state 57
 
-state 40
+state 39
 
-    (12) expression -> expression MODULO . expression
-    (8) expression -> . expression PLUS expression
-    (9) expression -> . expression MINUS expression
-    (10) expression -> . expression TIMES expression
-    (11) expression -> . expression DIVIDE expression
-    (12) expression -> . expression MODULO expression
-    (13) expression -> . LPAREN expression RPAREN
-    (14) expression -> . INTEGER
-    (15) expression -> . FLOAT
-    (16) expression -> . STRING
-    (17) expression -> . VARIABLE
-    (18) expression -> . TRUE
-    (19) expression -> . FALSE
+    (9) expression -> expression PLUS . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LPAREN          shift and go to state 17
-    INTEGER         shift and go to state 18
-    FLOAT           shift and go to state 19
-    STRING          shift and go to state 20
-    VARIABLE        shift and go to state 21
-    TRUE            shift and go to state 22
-    FALSE           shift and go to state 23
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
     expression                     shift and go to state 58
 
+state 40
+
+    (10) expression -> expression MINUS . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
+
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
+
+    expression                     shift and go to state 59
+
 state 41
 
-    (28) condition -> NOT condition .
-    (26) condition -> condition . AND condition
-    (27) condition -> condition . OR condition
+    (11) expression -> expression TIMES . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    LBRACE          reduce using rule 28 (condition -> NOT condition .)
-    AND             reduce using rule 28 (condition -> NOT condition .)
-    OR              reduce using rule 28 (condition -> NOT condition .)
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
-  ! AND             [ shift and go to state 28 ]
-  ! OR              [ shift and go to state 29 ]
-
+    expression                     shift and go to state 60
 
 state 42
 
-    (13) expression -> LPAREN expression . RPAREN
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (12) expression -> expression DIVIDE . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    RPAREN          shift and go to state 59
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
+    expression                     shift and go to state 61
 
 state 43
 
-    (32) function_decl -> FUNC VARIABLE LPAREN . RPAREN LBRACE statements RBRACE
+    (13) expression -> expression MODULO . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    RPAREN          shift and go to state 60
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
 
+    expression                     shift and go to state 62
 
 state 44
 
-    (30) print_stmt -> VARIABLE DOT VARIABLE LPAREN . VARIABLE RPAREN
+    (29) condition -> NOT condition .
+    (27) condition -> condition . AND condition
+    (28) condition -> condition . OR condition
 
-    VARIABLE        shift and go to state 61
+    LBRACE          reduce using rule 29 (condition -> NOT condition .)
+    AND             reduce using rule 29 (condition -> NOT condition .)
+    OR              reduce using rule 29 (condition -> NOT condition .)
+
+  ! AND             [ shift and go to state 31 ]
+  ! OR              [ shift and go to state 32 ]
 
 
 state 45
 
-    (31) for_stmt -> FOR condition LBRACE statements . RBRACE
+    (14) expression -> LPAREN expression . RPAREN
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
+
+    RPAREN          shift and go to state 63
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
+
+
+state 46
+
+    (33) function_decl -> FUNC VARIABLE LPAREN . RPAREN type LBRACE return_stmt RBRACE
+    (34) function_decl -> FUNC VARIABLE LPAREN . RPAREN type LBRACE statements return_stmt RBRACE
+
+    RPAREN          shift and go to state 64
+
+
+state 47
+
+    (40) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET . STRING_TYPE
+    (41) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET . STRING_TYPE LBRACE RBRACE
+    (42) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET . STRING_TYPE LBRACE string_list RBRACE
+
+    STRING_TYPE     shift and go to state 65
+
+
+state 48
+
+    (31) print_stmt -> FMT DOT PRINTLN LPAREN . expression RPAREN
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
+
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
+
+    expression                     shift and go to state 66
+
+state 49
+
+    (32) for_stmt -> FOR condition LBRACE statements . RBRACE
     (2) statements -> statements . statement
     (4) statement -> . short_var_decl
     (5) statement -> . print_stmt
     (6) statement -> . for_stmt
     (7) statement -> . function_decl
-    (29) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
-    (30) print_stmt -> . VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN
-    (31) for_stmt -> . FOR condition LBRACE statements RBRACE
-    (32) function_decl -> . FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE
+    (8) statement -> . slice_decl
+    (30) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
+    (31) print_stmt -> . FMT DOT PRINTLN LPAREN expression RPAREN
+    (32) for_stmt -> . FOR condition LBRACE statements RBRACE
+    (33) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
+    (34) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
+    (40) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE
+    (41) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+    (42) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
 
-    RBRACE          shift and go to state 62
-    VARIABLE        shift and go to state 8
-    FOR             shift and go to state 9
-    FUNC            shift and go to state 10
+    RBRACE          shift and go to state 67
+    VARIABLE        shift and go to state 9
+    FMT             shift and go to state 10
+    FOR             shift and go to state 11
+    FUNC            shift and go to state 12
 
-    statement                      shift and go to state 11
+    statement                      shift and go to state 13
     short_var_decl                 shift and go to state 4
     print_stmt                     shift and go to state 5
     for_stmt                       shift and go to state 6
     function_decl                  shift and go to state 7
-
-state 46
-
-    (26) condition -> condition AND condition .
-    (26) condition -> condition . AND condition
-    (27) condition -> condition . OR condition
-
-    LBRACE          reduce using rule 26 (condition -> condition AND condition .)
-    AND             reduce using rule 26 (condition -> condition AND condition .)
-    OR              reduce using rule 26 (condition -> condition AND condition .)
-
-  ! AND             [ shift and go to state 28 ]
-  ! OR              [ shift and go to state 29 ]
-
-
-state 47
-
-    (27) condition -> condition OR condition .
-    (26) condition -> condition . AND condition
-    (27) condition -> condition . OR condition
-
-    LBRACE          reduce using rule 27 (condition -> condition OR condition .)
-    OR              reduce using rule 27 (condition -> condition OR condition .)
-    AND             shift and go to state 28
-
-  ! AND             [ reduce using rule 27 (condition -> condition OR condition .) ]
-  ! OR              [ shift and go to state 29 ]
-
-
-state 48
-
-    (20) condition -> expression GT expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
-
-    LBRACE          reduce using rule 20 (condition -> expression GT expression .)
-    AND             reduce using rule 20 (condition -> expression GT expression .)
-    OR              reduce using rule 20 (condition -> expression GT expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
-
-
-state 49
-
-    (21) condition -> expression LT expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
-
-    LBRACE          reduce using rule 21 (condition -> expression LT expression .)
-    AND             reduce using rule 21 (condition -> expression LT expression .)
-    OR              reduce using rule 21 (condition -> expression LT expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
-
+    slice_decl                     shift and go to state 8
 
 state 50
 
-    (22) condition -> expression GE expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (27) condition -> condition AND condition .
+    (27) condition -> condition . AND condition
+    (28) condition -> condition . OR condition
 
-    LBRACE          reduce using rule 22 (condition -> expression GE expression .)
-    AND             reduce using rule 22 (condition -> expression GE expression .)
-    OR              reduce using rule 22 (condition -> expression GE expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
+    LBRACE          reduce using rule 27 (condition -> condition AND condition .)
+    AND             reduce using rule 27 (condition -> condition AND condition .)
+    OR              reduce using rule 27 (condition -> condition AND condition .)
+
+  ! AND             [ shift and go to state 31 ]
+  ! OR              [ shift and go to state 32 ]
 
 
 state 51
 
-    (23) condition -> expression LE expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (28) condition -> condition OR condition .
+    (27) condition -> condition . AND condition
+    (28) condition -> condition . OR condition
 
-    LBRACE          reduce using rule 23 (condition -> expression LE expression .)
-    AND             reduce using rule 23 (condition -> expression LE expression .)
-    OR              reduce using rule 23 (condition -> expression LE expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
+    LBRACE          reduce using rule 28 (condition -> condition OR condition .)
+    OR              reduce using rule 28 (condition -> condition OR condition .)
+    AND             shift and go to state 31
+
+  ! AND             [ reduce using rule 28 (condition -> condition OR condition .) ]
+  ! OR              [ shift and go to state 32 ]
 
 
 state 52
 
-    (24) condition -> expression EQ expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (21) condition -> expression GT expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    LBRACE          reduce using rule 24 (condition -> expression EQ expression .)
-    AND             reduce using rule 24 (condition -> expression EQ expression .)
-    OR              reduce using rule 24 (condition -> expression EQ expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
+    LBRACE          reduce using rule 21 (condition -> expression GT expression .)
+    AND             reduce using rule 21 (condition -> expression GT expression .)
+    OR              reduce using rule 21 (condition -> expression GT expression .)
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
 
 
 state 53
 
-    (25) condition -> expression NE expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (22) condition -> expression LT expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    LBRACE          reduce using rule 25 (condition -> expression NE expression .)
-    AND             reduce using rule 25 (condition -> expression NE expression .)
-    OR              reduce using rule 25 (condition -> expression NE expression .)
-    PLUS            shift and go to state 36
-    MINUS           shift and go to state 37
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
+    LBRACE          reduce using rule 22 (condition -> expression LT expression .)
+    AND             reduce using rule 22 (condition -> expression LT expression .)
+    OR              reduce using rule 22 (condition -> expression LT expression .)
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
 
 
 state 54
 
-    (8) expression -> expression PLUS expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (23) condition -> expression GE expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    GT              reduce using rule 8 (expression -> expression PLUS expression .)
-    LT              reduce using rule 8 (expression -> expression PLUS expression .)
-    GE              reduce using rule 8 (expression -> expression PLUS expression .)
-    LE              reduce using rule 8 (expression -> expression PLUS expression .)
-    EQ              reduce using rule 8 (expression -> expression PLUS expression .)
-    NE              reduce using rule 8 (expression -> expression PLUS expression .)
-    PLUS            reduce using rule 8 (expression -> expression PLUS expression .)
-    MINUS           reduce using rule 8 (expression -> expression PLUS expression .)
-    VARIABLE        reduce using rule 8 (expression -> expression PLUS expression .)
-    FOR             reduce using rule 8 (expression -> expression PLUS expression .)
-    FUNC            reduce using rule 8 (expression -> expression PLUS expression .)
-    $end            reduce using rule 8 (expression -> expression PLUS expression .)
-    RBRACE          reduce using rule 8 (expression -> expression PLUS expression .)
-    RPAREN          reduce using rule 8 (expression -> expression PLUS expression .)
-    LBRACE          reduce using rule 8 (expression -> expression PLUS expression .)
-    AND             reduce using rule 8 (expression -> expression PLUS expression .)
-    OR              reduce using rule 8 (expression -> expression PLUS expression .)
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
-
-  ! TIMES           [ reduce using rule 8 (expression -> expression PLUS expression .) ]
-  ! DIVIDE          [ reduce using rule 8 (expression -> expression PLUS expression .) ]
-  ! MODULO          [ reduce using rule 8 (expression -> expression PLUS expression .) ]
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
+    LBRACE          reduce using rule 23 (condition -> expression GE expression .)
+    AND             reduce using rule 23 (condition -> expression GE expression .)
+    OR              reduce using rule 23 (condition -> expression GE expression .)
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
 
 
 state 55
 
-    (9) expression -> expression MINUS expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (24) condition -> expression LE expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    GT              reduce using rule 9 (expression -> expression MINUS expression .)
-    LT              reduce using rule 9 (expression -> expression MINUS expression .)
-    GE              reduce using rule 9 (expression -> expression MINUS expression .)
-    LE              reduce using rule 9 (expression -> expression MINUS expression .)
-    EQ              reduce using rule 9 (expression -> expression MINUS expression .)
-    NE              reduce using rule 9 (expression -> expression MINUS expression .)
-    PLUS            reduce using rule 9 (expression -> expression MINUS expression .)
-    MINUS           reduce using rule 9 (expression -> expression MINUS expression .)
-    VARIABLE        reduce using rule 9 (expression -> expression MINUS expression .)
-    FOR             reduce using rule 9 (expression -> expression MINUS expression .)
-    FUNC            reduce using rule 9 (expression -> expression MINUS expression .)
-    $end            reduce using rule 9 (expression -> expression MINUS expression .)
-    RBRACE          reduce using rule 9 (expression -> expression MINUS expression .)
-    RPAREN          reduce using rule 9 (expression -> expression MINUS expression .)
-    LBRACE          reduce using rule 9 (expression -> expression MINUS expression .)
-    AND             reduce using rule 9 (expression -> expression MINUS expression .)
-    OR              reduce using rule 9 (expression -> expression MINUS expression .)
-    TIMES           shift and go to state 38
-    DIVIDE          shift and go to state 39
-    MODULO          shift and go to state 40
-
-  ! TIMES           [ reduce using rule 9 (expression -> expression MINUS expression .) ]
-  ! DIVIDE          [ reduce using rule 9 (expression -> expression MINUS expression .) ]
-  ! MODULO          [ reduce using rule 9 (expression -> expression MINUS expression .) ]
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
+    LBRACE          reduce using rule 24 (condition -> expression LE expression .)
+    AND             reduce using rule 24 (condition -> expression LE expression .)
+    OR              reduce using rule 24 (condition -> expression LE expression .)
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
 
 
 state 56
 
-    (10) expression -> expression TIMES expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (25) condition -> expression EQ expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    GT              reduce using rule 10 (expression -> expression TIMES expression .)
-    LT              reduce using rule 10 (expression -> expression TIMES expression .)
-    GE              reduce using rule 10 (expression -> expression TIMES expression .)
-    LE              reduce using rule 10 (expression -> expression TIMES expression .)
-    EQ              reduce using rule 10 (expression -> expression TIMES expression .)
-    NE              reduce using rule 10 (expression -> expression TIMES expression .)
-    PLUS            reduce using rule 10 (expression -> expression TIMES expression .)
-    MINUS           reduce using rule 10 (expression -> expression TIMES expression .)
-    TIMES           reduce using rule 10 (expression -> expression TIMES expression .)
-    DIVIDE          reduce using rule 10 (expression -> expression TIMES expression .)
-    MODULO          reduce using rule 10 (expression -> expression TIMES expression .)
-    VARIABLE        reduce using rule 10 (expression -> expression TIMES expression .)
-    FOR             reduce using rule 10 (expression -> expression TIMES expression .)
-    FUNC            reduce using rule 10 (expression -> expression TIMES expression .)
-    $end            reduce using rule 10 (expression -> expression TIMES expression .)
-    RBRACE          reduce using rule 10 (expression -> expression TIMES expression .)
-    RPAREN          reduce using rule 10 (expression -> expression TIMES expression .)
-    LBRACE          reduce using rule 10 (expression -> expression TIMES expression .)
-    AND             reduce using rule 10 (expression -> expression TIMES expression .)
-    OR              reduce using rule 10 (expression -> expression TIMES expression .)
-
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
-  ! TIMES           [ shift and go to state 38 ]
-  ! DIVIDE          [ shift and go to state 39 ]
-  ! MODULO          [ shift and go to state 40 ]
+    LBRACE          reduce using rule 25 (condition -> expression EQ expression .)
+    AND             reduce using rule 25 (condition -> expression EQ expression .)
+    OR              reduce using rule 25 (condition -> expression EQ expression .)
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
 
 
 state 57
 
-    (11) expression -> expression DIVIDE expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (26) condition -> expression NE expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    GT              reduce using rule 11 (expression -> expression DIVIDE expression .)
-    LT              reduce using rule 11 (expression -> expression DIVIDE expression .)
-    GE              reduce using rule 11 (expression -> expression DIVIDE expression .)
-    LE              reduce using rule 11 (expression -> expression DIVIDE expression .)
-    EQ              reduce using rule 11 (expression -> expression DIVIDE expression .)
-    NE              reduce using rule 11 (expression -> expression DIVIDE expression .)
-    PLUS            reduce using rule 11 (expression -> expression DIVIDE expression .)
-    MINUS           reduce using rule 11 (expression -> expression DIVIDE expression .)
-    TIMES           reduce using rule 11 (expression -> expression DIVIDE expression .)
-    DIVIDE          reduce using rule 11 (expression -> expression DIVIDE expression .)
-    MODULO          reduce using rule 11 (expression -> expression DIVIDE expression .)
-    VARIABLE        reduce using rule 11 (expression -> expression DIVIDE expression .)
-    FOR             reduce using rule 11 (expression -> expression DIVIDE expression .)
-    FUNC            reduce using rule 11 (expression -> expression DIVIDE expression .)
-    $end            reduce using rule 11 (expression -> expression DIVIDE expression .)
-    RBRACE          reduce using rule 11 (expression -> expression DIVIDE expression .)
-    RPAREN          reduce using rule 11 (expression -> expression DIVIDE expression .)
-    LBRACE          reduce using rule 11 (expression -> expression DIVIDE expression .)
-    AND             reduce using rule 11 (expression -> expression DIVIDE expression .)
-    OR              reduce using rule 11 (expression -> expression DIVIDE expression .)
-
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
-  ! TIMES           [ shift and go to state 38 ]
-  ! DIVIDE          [ shift and go to state 39 ]
-  ! MODULO          [ shift and go to state 40 ]
+    LBRACE          reduce using rule 26 (condition -> expression NE expression .)
+    AND             reduce using rule 26 (condition -> expression NE expression .)
+    OR              reduce using rule 26 (condition -> expression NE expression .)
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
 
 
 state 58
 
-    (12) expression -> expression MODULO expression .
-    (8) expression -> expression . PLUS expression
-    (9) expression -> expression . MINUS expression
-    (10) expression -> expression . TIMES expression
-    (11) expression -> expression . DIVIDE expression
-    (12) expression -> expression . MODULO expression
+    (9) expression -> expression PLUS expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    GT              reduce using rule 12 (expression -> expression MODULO expression .)
-    LT              reduce using rule 12 (expression -> expression MODULO expression .)
-    GE              reduce using rule 12 (expression -> expression MODULO expression .)
-    LE              reduce using rule 12 (expression -> expression MODULO expression .)
-    EQ              reduce using rule 12 (expression -> expression MODULO expression .)
-    NE              reduce using rule 12 (expression -> expression MODULO expression .)
-    PLUS            reduce using rule 12 (expression -> expression MODULO expression .)
-    MINUS           reduce using rule 12 (expression -> expression MODULO expression .)
-    TIMES           reduce using rule 12 (expression -> expression MODULO expression .)
-    DIVIDE          reduce using rule 12 (expression -> expression MODULO expression .)
-    MODULO          reduce using rule 12 (expression -> expression MODULO expression .)
-    VARIABLE        reduce using rule 12 (expression -> expression MODULO expression .)
-    FOR             reduce using rule 12 (expression -> expression MODULO expression .)
-    FUNC            reduce using rule 12 (expression -> expression MODULO expression .)
-    $end            reduce using rule 12 (expression -> expression MODULO expression .)
-    RBRACE          reduce using rule 12 (expression -> expression MODULO expression .)
-    RPAREN          reduce using rule 12 (expression -> expression MODULO expression .)
-    LBRACE          reduce using rule 12 (expression -> expression MODULO expression .)
-    AND             reduce using rule 12 (expression -> expression MODULO expression .)
-    OR              reduce using rule 12 (expression -> expression MODULO expression .)
+    GT              reduce using rule 9 (expression -> expression PLUS expression .)
+    LT              reduce using rule 9 (expression -> expression PLUS expression .)
+    GE              reduce using rule 9 (expression -> expression PLUS expression .)
+    LE              reduce using rule 9 (expression -> expression PLUS expression .)
+    EQ              reduce using rule 9 (expression -> expression PLUS expression .)
+    NE              reduce using rule 9 (expression -> expression PLUS expression .)
+    PLUS            reduce using rule 9 (expression -> expression PLUS expression .)
+    MINUS           reduce using rule 9 (expression -> expression PLUS expression .)
+    VARIABLE        reduce using rule 9 (expression -> expression PLUS expression .)
+    FMT             reduce using rule 9 (expression -> expression PLUS expression .)
+    FOR             reduce using rule 9 (expression -> expression PLUS expression .)
+    FUNC            reduce using rule 9 (expression -> expression PLUS expression .)
+    $end            reduce using rule 9 (expression -> expression PLUS expression .)
+    RBRACE          reduce using rule 9 (expression -> expression PLUS expression .)
+    RETURN          reduce using rule 9 (expression -> expression PLUS expression .)
+    RPAREN          reduce using rule 9 (expression -> expression PLUS expression .)
+    LBRACE          reduce using rule 9 (expression -> expression PLUS expression .)
+    AND             reduce using rule 9 (expression -> expression PLUS expression .)
+    OR              reduce using rule 9 (expression -> expression PLUS expression .)
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
 
-  ! PLUS            [ shift and go to state 36 ]
-  ! MINUS           [ shift and go to state 37 ]
-  ! TIMES           [ shift and go to state 38 ]
-  ! DIVIDE          [ shift and go to state 39 ]
-  ! MODULO          [ shift and go to state 40 ]
+  ! TIMES           [ reduce using rule 9 (expression -> expression PLUS expression .) ]
+  ! DIVIDE          [ reduce using rule 9 (expression -> expression PLUS expression .) ]
+  ! MODULO          [ reduce using rule 9 (expression -> expression PLUS expression .) ]
+  ! PLUS            [ shift and go to state 39 ]
+  ! MINUS           [ shift and go to state 40 ]
 
 
 state 59
 
-    (13) expression -> LPAREN expression RPAREN .
+    (10) expression -> expression MINUS expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    GT              reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    LT              reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    GE              reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    LE              reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    EQ              reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    NE              reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    PLUS            reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    MINUS           reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    TIMES           reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    DIVIDE          reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    MODULO          reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    VARIABLE        reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    FOR             reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    FUNC            reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    $end            reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    RBRACE          reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    RPAREN          reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    LBRACE          reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    AND             reduce using rule 13 (expression -> LPAREN expression RPAREN .)
-    OR              reduce using rule 13 (expression -> LPAREN expression RPAREN .)
+    GT              reduce using rule 10 (expression -> expression MINUS expression .)
+    LT              reduce using rule 10 (expression -> expression MINUS expression .)
+    GE              reduce using rule 10 (expression -> expression MINUS expression .)
+    LE              reduce using rule 10 (expression -> expression MINUS expression .)
+    EQ              reduce using rule 10 (expression -> expression MINUS expression .)
+    NE              reduce using rule 10 (expression -> expression MINUS expression .)
+    PLUS            reduce using rule 10 (expression -> expression MINUS expression .)
+    MINUS           reduce using rule 10 (expression -> expression MINUS expression .)
+    VARIABLE        reduce using rule 10 (expression -> expression MINUS expression .)
+    FMT             reduce using rule 10 (expression -> expression MINUS expression .)
+    FOR             reduce using rule 10 (expression -> expression MINUS expression .)
+    FUNC            reduce using rule 10 (expression -> expression MINUS expression .)
+    $end            reduce using rule 10 (expression -> expression MINUS expression .)
+    RBRACE          reduce using rule 10 (expression -> expression MINUS expression .)
+    RETURN          reduce using rule 10 (expression -> expression MINUS expression .)
+    RPAREN          reduce using rule 10 (expression -> expression MINUS expression .)
+    LBRACE          reduce using rule 10 (expression -> expression MINUS expression .)
+    AND             reduce using rule 10 (expression -> expression MINUS expression .)
+    OR              reduce using rule 10 (expression -> expression MINUS expression .)
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
+
+  ! TIMES           [ reduce using rule 10 (expression -> expression MINUS expression .) ]
+  ! DIVIDE          [ reduce using rule 10 (expression -> expression MINUS expression .) ]
+  ! MODULO          [ reduce using rule 10 (expression -> expression MINUS expression .) ]
+  ! PLUS            [ shift and go to state 39 ]
+  ! MINUS           [ shift and go to state 40 ]
 
 
 state 60
 
-    (32) function_decl -> FUNC VARIABLE LPAREN RPAREN . LBRACE statements RBRACE
+    (11) expression -> expression TIMES expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    LBRACE          shift and go to state 63
+    GT              reduce using rule 11 (expression -> expression TIMES expression .)
+    LT              reduce using rule 11 (expression -> expression TIMES expression .)
+    GE              reduce using rule 11 (expression -> expression TIMES expression .)
+    LE              reduce using rule 11 (expression -> expression TIMES expression .)
+    EQ              reduce using rule 11 (expression -> expression TIMES expression .)
+    NE              reduce using rule 11 (expression -> expression TIMES expression .)
+    PLUS            reduce using rule 11 (expression -> expression TIMES expression .)
+    MINUS           reduce using rule 11 (expression -> expression TIMES expression .)
+    TIMES           reduce using rule 11 (expression -> expression TIMES expression .)
+    DIVIDE          reduce using rule 11 (expression -> expression TIMES expression .)
+    MODULO          reduce using rule 11 (expression -> expression TIMES expression .)
+    VARIABLE        reduce using rule 11 (expression -> expression TIMES expression .)
+    FMT             reduce using rule 11 (expression -> expression TIMES expression .)
+    FOR             reduce using rule 11 (expression -> expression TIMES expression .)
+    FUNC            reduce using rule 11 (expression -> expression TIMES expression .)
+    $end            reduce using rule 11 (expression -> expression TIMES expression .)
+    RBRACE          reduce using rule 11 (expression -> expression TIMES expression .)
+    RETURN          reduce using rule 11 (expression -> expression TIMES expression .)
+    RPAREN          reduce using rule 11 (expression -> expression TIMES expression .)
+    LBRACE          reduce using rule 11 (expression -> expression TIMES expression .)
+    AND             reduce using rule 11 (expression -> expression TIMES expression .)
+    OR              reduce using rule 11 (expression -> expression TIMES expression .)
+
+  ! PLUS            [ shift and go to state 39 ]
+  ! MINUS           [ shift and go to state 40 ]
+  ! TIMES           [ shift and go to state 41 ]
+  ! DIVIDE          [ shift and go to state 42 ]
+  ! MODULO          [ shift and go to state 43 ]
 
 
 state 61
 
-    (30) print_stmt -> VARIABLE DOT VARIABLE LPAREN VARIABLE . RPAREN
+    (12) expression -> expression DIVIDE expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    RPAREN          shift and go to state 64
+    GT              reduce using rule 12 (expression -> expression DIVIDE expression .)
+    LT              reduce using rule 12 (expression -> expression DIVIDE expression .)
+    GE              reduce using rule 12 (expression -> expression DIVIDE expression .)
+    LE              reduce using rule 12 (expression -> expression DIVIDE expression .)
+    EQ              reduce using rule 12 (expression -> expression DIVIDE expression .)
+    NE              reduce using rule 12 (expression -> expression DIVIDE expression .)
+    PLUS            reduce using rule 12 (expression -> expression DIVIDE expression .)
+    MINUS           reduce using rule 12 (expression -> expression DIVIDE expression .)
+    TIMES           reduce using rule 12 (expression -> expression DIVIDE expression .)
+    DIVIDE          reduce using rule 12 (expression -> expression DIVIDE expression .)
+    MODULO          reduce using rule 12 (expression -> expression DIVIDE expression .)
+    VARIABLE        reduce using rule 12 (expression -> expression DIVIDE expression .)
+    FMT             reduce using rule 12 (expression -> expression DIVIDE expression .)
+    FOR             reduce using rule 12 (expression -> expression DIVIDE expression .)
+    FUNC            reduce using rule 12 (expression -> expression DIVIDE expression .)
+    $end            reduce using rule 12 (expression -> expression DIVIDE expression .)
+    RBRACE          reduce using rule 12 (expression -> expression DIVIDE expression .)
+    RETURN          reduce using rule 12 (expression -> expression DIVIDE expression .)
+    RPAREN          reduce using rule 12 (expression -> expression DIVIDE expression .)
+    LBRACE          reduce using rule 12 (expression -> expression DIVIDE expression .)
+    AND             reduce using rule 12 (expression -> expression DIVIDE expression .)
+    OR              reduce using rule 12 (expression -> expression DIVIDE expression .)
+
+  ! PLUS            [ shift and go to state 39 ]
+  ! MINUS           [ shift and go to state 40 ]
+  ! TIMES           [ shift and go to state 41 ]
+  ! DIVIDE          [ shift and go to state 42 ]
+  ! MODULO          [ shift and go to state 43 ]
 
 
 state 62
 
-    (31) for_stmt -> FOR condition LBRACE statements RBRACE .
+    (13) expression -> expression MODULO expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
 
-    VARIABLE        reduce using rule 31 (for_stmt -> FOR condition LBRACE statements RBRACE .)
-    FOR             reduce using rule 31 (for_stmt -> FOR condition LBRACE statements RBRACE .)
-    FUNC            reduce using rule 31 (for_stmt -> FOR condition LBRACE statements RBRACE .)
-    $end            reduce using rule 31 (for_stmt -> FOR condition LBRACE statements RBRACE .)
-    RBRACE          reduce using rule 31 (for_stmt -> FOR condition LBRACE statements RBRACE .)
+    GT              reduce using rule 13 (expression -> expression MODULO expression .)
+    LT              reduce using rule 13 (expression -> expression MODULO expression .)
+    GE              reduce using rule 13 (expression -> expression MODULO expression .)
+    LE              reduce using rule 13 (expression -> expression MODULO expression .)
+    EQ              reduce using rule 13 (expression -> expression MODULO expression .)
+    NE              reduce using rule 13 (expression -> expression MODULO expression .)
+    PLUS            reduce using rule 13 (expression -> expression MODULO expression .)
+    MINUS           reduce using rule 13 (expression -> expression MODULO expression .)
+    TIMES           reduce using rule 13 (expression -> expression MODULO expression .)
+    DIVIDE          reduce using rule 13 (expression -> expression MODULO expression .)
+    MODULO          reduce using rule 13 (expression -> expression MODULO expression .)
+    VARIABLE        reduce using rule 13 (expression -> expression MODULO expression .)
+    FMT             reduce using rule 13 (expression -> expression MODULO expression .)
+    FOR             reduce using rule 13 (expression -> expression MODULO expression .)
+    FUNC            reduce using rule 13 (expression -> expression MODULO expression .)
+    $end            reduce using rule 13 (expression -> expression MODULO expression .)
+    RBRACE          reduce using rule 13 (expression -> expression MODULO expression .)
+    RETURN          reduce using rule 13 (expression -> expression MODULO expression .)
+    RPAREN          reduce using rule 13 (expression -> expression MODULO expression .)
+    LBRACE          reduce using rule 13 (expression -> expression MODULO expression .)
+    AND             reduce using rule 13 (expression -> expression MODULO expression .)
+    OR              reduce using rule 13 (expression -> expression MODULO expression .)
+
+  ! PLUS            [ shift and go to state 39 ]
+  ! MINUS           [ shift and go to state 40 ]
+  ! TIMES           [ shift and go to state 41 ]
+  ! DIVIDE          [ shift and go to state 42 ]
+  ! MODULO          [ shift and go to state 43 ]
 
 
 state 63
 
-    (32) function_decl -> FUNC VARIABLE LPAREN RPAREN LBRACE . statements RBRACE
+    (14) expression -> LPAREN expression RPAREN .
+
+    GT              reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    LT              reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    GE              reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    LE              reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    EQ              reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    NE              reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    PLUS            reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    MINUS           reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    TIMES           reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    DIVIDE          reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    MODULO          reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    VARIABLE        reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    FMT             reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    FOR             reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    FUNC            reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    $end            reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    RBRACE          reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    RETURN          reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    RPAREN          reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    LBRACE          reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    AND             reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+    OR              reduce using rule 14 (expression -> LPAREN expression RPAREN .)
+
+
+state 64
+
+    (33) function_decl -> FUNC VARIABLE LPAREN RPAREN . type LBRACE return_stmt RBRACE
+    (34) function_decl -> FUNC VARIABLE LPAREN RPAREN . type LBRACE statements return_stmt RBRACE
+    (35) type -> . INT_TYPE
+    (36) type -> . FLOAT64_TYPE
+    (37) type -> . STRING_TYPE
+    (38) type -> . BOOL_TYPE
+
+    INT_TYPE        shift and go to state 69
+    FLOAT64_TYPE    shift and go to state 70
+    STRING_TYPE     shift and go to state 71
+    BOOL_TYPE       shift and go to state 72
+
+    type                           shift and go to state 68
+
+state 65
+
+    (40) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE .
+    (41) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE . LBRACE RBRACE
+    (42) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE . LBRACE string_list RBRACE
+
+    VARIABLE        reduce using rule 40 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE .)
+    FMT             reduce using rule 40 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE .)
+    FOR             reduce using rule 40 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE .)
+    FUNC            reduce using rule 40 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE .)
+    $end            reduce using rule 40 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE .)
+    RBRACE          reduce using rule 40 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE .)
+    RETURN          reduce using rule 40 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE .)
+    LBRACE          shift and go to state 73
+
+
+state 66
+
+    (31) print_stmt -> FMT DOT PRINTLN LPAREN expression . RPAREN
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
+
+    RPAREN          shift and go to state 74
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
+
+
+state 67
+
+    (32) for_stmt -> FOR condition LBRACE statements RBRACE .
+
+    VARIABLE        reduce using rule 32 (for_stmt -> FOR condition LBRACE statements RBRACE .)
+    FMT             reduce using rule 32 (for_stmt -> FOR condition LBRACE statements RBRACE .)
+    FOR             reduce using rule 32 (for_stmt -> FOR condition LBRACE statements RBRACE .)
+    FUNC            reduce using rule 32 (for_stmt -> FOR condition LBRACE statements RBRACE .)
+    $end            reduce using rule 32 (for_stmt -> FOR condition LBRACE statements RBRACE .)
+    RBRACE          reduce using rule 32 (for_stmt -> FOR condition LBRACE statements RBRACE .)
+    RETURN          reduce using rule 32 (for_stmt -> FOR condition LBRACE statements RBRACE .)
+
+
+state 68
+
+    (33) function_decl -> FUNC VARIABLE LPAREN RPAREN type . LBRACE return_stmt RBRACE
+    (34) function_decl -> FUNC VARIABLE LPAREN RPAREN type . LBRACE statements return_stmt RBRACE
+
+    LBRACE          shift and go to state 75
+
+
+state 69
+
+    (35) type -> INT_TYPE .
+
+    LBRACE          reduce using rule 35 (type -> INT_TYPE .)
+
+
+state 70
+
+    (36) type -> FLOAT64_TYPE .
+
+    LBRACE          reduce using rule 36 (type -> FLOAT64_TYPE .)
+
+
+state 71
+
+    (37) type -> STRING_TYPE .
+
+    LBRACE          reduce using rule 37 (type -> STRING_TYPE .)
+
+
+state 72
+
+    (38) type -> BOOL_TYPE .
+
+    LBRACE          reduce using rule 38 (type -> BOOL_TYPE .)
+
+
+state 73
+
+    (41) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE . RBRACE
+    (42) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE . string_list RBRACE
+    (43) string_list -> . STRING
+    (44) string_list -> . string_list COMMA STRING
+
+    RBRACE          shift and go to state 76
+    STRING          shift and go to state 78
+
+    string_list                    shift and go to state 77
+
+state 74
+
+    (31) print_stmt -> FMT DOT PRINTLN LPAREN expression RPAREN .
+
+    VARIABLE        reduce using rule 31 (print_stmt -> FMT DOT PRINTLN LPAREN expression RPAREN .)
+    FMT             reduce using rule 31 (print_stmt -> FMT DOT PRINTLN LPAREN expression RPAREN .)
+    FOR             reduce using rule 31 (print_stmt -> FMT DOT PRINTLN LPAREN expression RPAREN .)
+    FUNC            reduce using rule 31 (print_stmt -> FMT DOT PRINTLN LPAREN expression RPAREN .)
+    $end            reduce using rule 31 (print_stmt -> FMT DOT PRINTLN LPAREN expression RPAREN .)
+    RBRACE          reduce using rule 31 (print_stmt -> FMT DOT PRINTLN LPAREN expression RPAREN .)
+    RETURN          reduce using rule 31 (print_stmt -> FMT DOT PRINTLN LPAREN expression RPAREN .)
+
+
+state 75
+
+    (33) function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE . return_stmt RBRACE
+    (34) function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE . statements return_stmt RBRACE
+    (39) return_stmt -> . RETURN expression
     (2) statements -> . statements statement
     (3) statements -> . statement
     (4) statement -> . short_var_decl
     (5) statement -> . print_stmt
     (6) statement -> . for_stmt
     (7) statement -> . function_decl
-    (29) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
-    (30) print_stmt -> . VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN
-    (31) for_stmt -> . FOR condition LBRACE statements RBRACE
-    (32) function_decl -> . FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE
+    (8) statement -> . slice_decl
+    (30) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
+    (31) print_stmt -> . FMT DOT PRINTLN LPAREN expression RPAREN
+    (32) for_stmt -> . FOR condition LBRACE statements RBRACE
+    (33) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
+    (34) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
+    (40) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE
+    (41) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+    (42) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
 
-    VARIABLE        shift and go to state 8
-    FOR             shift and go to state 9
-    FUNC            shift and go to state 10
+    RETURN          shift and go to state 81
+    VARIABLE        shift and go to state 9
+    FMT             shift and go to state 10
+    FOR             shift and go to state 11
+    FUNC            shift and go to state 12
 
-    statements                     shift and go to state 65
+    return_stmt                    shift and go to state 79
+    statements                     shift and go to state 80
     statement                      shift and go to state 3
     short_var_decl                 shift and go to state 4
     print_stmt                     shift and go to state 5
     for_stmt                       shift and go to state 6
     function_decl                  shift and go to state 7
+    slice_decl                     shift and go to state 8
 
-state 64
+state 76
 
-    (30) print_stmt -> VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN .
+    (41) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE .
 
-    VARIABLE        reduce using rule 30 (print_stmt -> VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN .)
-    FOR             reduce using rule 30 (print_stmt -> VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN .)
-    FUNC            reduce using rule 30 (print_stmt -> VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN .)
-    $end            reduce using rule 30 (print_stmt -> VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN .)
-    RBRACE          reduce using rule 30 (print_stmt -> VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN .)
+    VARIABLE        reduce using rule 41 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE .)
+    FMT             reduce using rule 41 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE .)
+    FOR             reduce using rule 41 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE .)
+    FUNC            reduce using rule 41 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE .)
+    $end            reduce using rule 41 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE .)
+    RBRACE          reduce using rule 41 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE .)
+    RETURN          reduce using rule 41 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE .)
 
 
-state 65
+state 77
 
-    (32) function_decl -> FUNC VARIABLE LPAREN RPAREN LBRACE statements . RBRACE
+    (42) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list . RBRACE
+    (44) string_list -> string_list . COMMA STRING
+
+    RBRACE          shift and go to state 82
+    COMMA           shift and go to state 83
+
+
+state 78
+
+    (43) string_list -> STRING .
+
+    RBRACE          reduce using rule 43 (string_list -> STRING .)
+    COMMA           reduce using rule 43 (string_list -> STRING .)
+
+
+state 79
+
+    (33) function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt . RBRACE
+
+    RBRACE          shift and go to state 84
+
+
+state 80
+
+    (34) function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements . return_stmt RBRACE
     (2) statements -> statements . statement
+    (39) return_stmt -> . RETURN expression
     (4) statement -> . short_var_decl
     (5) statement -> . print_stmt
     (6) statement -> . for_stmt
     (7) statement -> . function_decl
-    (29) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
-    (30) print_stmt -> . VARIABLE DOT VARIABLE LPAREN VARIABLE RPAREN
-    (31) for_stmt -> . FOR condition LBRACE statements RBRACE
-    (32) function_decl -> . FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE
+    (8) statement -> . slice_decl
+    (30) short_var_decl -> . VARIABLE DECLARE_ASSIGN expression
+    (31) print_stmt -> . FMT DOT PRINTLN LPAREN expression RPAREN
+    (32) for_stmt -> . FOR condition LBRACE statements RBRACE
+    (33) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
+    (34) function_decl -> . FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
+    (40) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE
+    (41) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+    (42) slice_decl -> . VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
 
-    RBRACE          shift and go to state 66
-    VARIABLE        shift and go to state 8
-    FOR             shift and go to state 9
-    FUNC            shift and go to state 10
+    RETURN          shift and go to state 81
+    VARIABLE        shift and go to state 9
+    FMT             shift and go to state 10
+    FOR             shift and go to state 11
+    FUNC            shift and go to state 12
 
-    statement                      shift and go to state 11
+    return_stmt                    shift and go to state 85
+    statement                      shift and go to state 13
     short_var_decl                 shift and go to state 4
     print_stmt                     shift and go to state 5
     for_stmt                       shift and go to state 6
     function_decl                  shift and go to state 7
+    slice_decl                     shift and go to state 8
 
-state 66
+state 81
 
-    (32) function_decl -> FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE .
+    (39) return_stmt -> RETURN . expression
+    (9) expression -> . expression PLUS expression
+    (10) expression -> . expression MINUS expression
+    (11) expression -> . expression TIMES expression
+    (12) expression -> . expression DIVIDE expression
+    (13) expression -> . expression MODULO expression
+    (14) expression -> . LPAREN expression RPAREN
+    (15) expression -> . INTEGER
+    (16) expression -> . FLOAT
+    (17) expression -> . STRING
+    (18) expression -> . VARIABLE
+    (19) expression -> . TRUE
+    (20) expression -> . FALSE
 
-    VARIABLE        reduce using rule 32 (function_decl -> FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE .)
-    FOR             reduce using rule 32 (function_decl -> FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE .)
-    FUNC            reduce using rule 32 (function_decl -> FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE .)
-    $end            reduce using rule 32 (function_decl -> FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE .)
-    RBRACE          reduce using rule 32 (function_decl -> FUNC VARIABLE LPAREN RPAREN LBRACE statements RBRACE .)
+    LPAREN          shift and go to state 19
+    INTEGER         shift and go to state 20
+    FLOAT           shift and go to state 21
+    STRING          shift and go to state 22
+    VARIABLE        shift and go to state 23
+    TRUE            shift and go to state 24
+    FALSE           shift and go to state 25
+
+    expression                     shift and go to state 86
+
+state 82
+
+    (42) slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE .
+
+    VARIABLE        reduce using rule 42 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE .)
+    FMT             reduce using rule 42 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE .)
+    FOR             reduce using rule 42 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE .)
+    FUNC            reduce using rule 42 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE .)
+    $end            reduce using rule 42 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE .)
+    RBRACE          reduce using rule 42 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE .)
+    RETURN          reduce using rule 42 (slice_decl -> VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE .)
+
+
+state 83
+
+    (44) string_list -> string_list COMMA . STRING
+
+    STRING          shift and go to state 87
+
+
+state 84
+
+    (33) function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE .
+
+    VARIABLE        reduce using rule 33 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE .)
+    FMT             reduce using rule 33 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE .)
+    FOR             reduce using rule 33 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE .)
+    FUNC            reduce using rule 33 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE .)
+    $end            reduce using rule 33 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE .)
+    RBRACE          reduce using rule 33 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE .)
+    RETURN          reduce using rule 33 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE .)
+
+
+state 85
+
+    (34) function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt . RBRACE
+
+    RBRACE          shift and go to state 88
+
+
+state 86
+
+    (39) return_stmt -> RETURN expression .
+    (9) expression -> expression . PLUS expression
+    (10) expression -> expression . MINUS expression
+    (11) expression -> expression . TIMES expression
+    (12) expression -> expression . DIVIDE expression
+    (13) expression -> expression . MODULO expression
+
+    RBRACE          reduce using rule 39 (return_stmt -> RETURN expression .)
+    PLUS            shift and go to state 39
+    MINUS           shift and go to state 40
+    TIMES           shift and go to state 41
+    DIVIDE          shift and go to state 42
+    MODULO          shift and go to state 43
+
+
+state 87
+
+    (44) string_list -> string_list COMMA STRING .
+
+    RBRACE          reduce using rule 44 (string_list -> string_list COMMA STRING .)
+    COMMA           reduce using rule 44 (string_list -> string_list COMMA STRING .)
+
+
+state 88
+
+    (34) function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE .
+
+    VARIABLE        reduce using rule 34 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE .)
+    FMT             reduce using rule 34 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE .)
+    FOR             reduce using rule 34 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE .)
+    FUNC            reduce using rule 34 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE .)
+    $end            reduce using rule 34 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE .)
+    RBRACE          reduce using rule 34 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE .)
+    RETURN          reduce using rule 34 (function_decl -> FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE .)
 
