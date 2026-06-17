@@ -45,9 +45,7 @@ func main() {
 	fmt.Println(edadUsuario)
 	fmt.Println(activoUsuario)
 
-	nombres := []string
 	nombresVacio := []string{}
-	companeras := []string{"Milena", "Carla"}
 
 	for edadUsuario > 18 {
 		adulto := true

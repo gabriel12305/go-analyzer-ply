@@ -158,20 +158,10 @@ def p_return_stmt(p):
     '''
     pass
 
-# Data structure - Slice
-# nombres := []string or nombres := []string{} or nombres := []string{"Milena", "Carla"}
+# Data structure - Slice. Ej. nombres := []string{} 
 def p_slice_decl(p):
     '''
-    slice_decl : VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE
-               | VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
-               | VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE string_list RBRACE
-    '''
-    pass
-
-def p_string_list(p):
-    '''
-    string_list : STRING
-                | string_list COMMA STRING
+    slice_decl : VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
     '''
     pass
 
