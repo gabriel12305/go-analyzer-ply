@@ -1,37 +1,26 @@
 package main
 
-func main() {
+var nombre string
 
-    a += 5
-    b -= 3
-    c *= 2
-    d /= 4
+fmt.Scan(&nombre)
 
-    if a == b {
-    }
+edades := map[string]int{}
 
-    if a != b {
-    }
+switch nombre {
 
-    if a >= b {
-    }
+case "Gabriel":
+    fmt.Println(nombre)
 
-    if a <= b {
-    }
+case "Carlos":
+    fmt.Println(nombre)
 
-    resultado := (a > b) && (c < d);
-	valor := 10 % 3
+default:
+    fmt.Println(nombre)
 
-	activo := true
-	admin := false
+}
 
-	if activo || admin {
-	}
+func calcular(a int, b int, c int) int {
 
-	if !activo {
-	}
-    @
-	arreglo := [3]int{1,2,3}
+    return a
 
-	fmt.Println(arreglo[0])
 }

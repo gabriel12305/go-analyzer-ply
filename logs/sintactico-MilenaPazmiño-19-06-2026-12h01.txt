@@ -1,0 +1,7 @@
+
+===== SYNTAX ERRORS =====
+Syntax error at line 1: unexpected token 'package'
+Syntax error at line 5: unexpected token '{'
+Syntax error at line 14: unexpected token '='
+Syntax error at line 33: unexpected token '}'
+Syntax error at line 60: unexpected token '}'

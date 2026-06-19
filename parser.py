@@ -1,6 +1,8 @@
 import ply.yacc as yacc
 from lexer import tokens, build_lexer
 
+syntax_errors = []
+
 # =====================================
 # START SYMBOL
 # =====================================
@@ -47,6 +49,11 @@ def p_statement(p):
               | for_stmt
               | function_decl
               | slice_decl
+              | var_decl
+              | switch_stmt
+              | map_decl
+              | multi_param_function
+              | scan_stmt
     '''
     pass
 
@@ -143,6 +150,7 @@ def p_function_decl(p):
     function_decl : FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
                   | FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
     '''
+    pass
 
 def p_type(p):
     '''
@@ -151,6 +159,7 @@ def p_type(p):
          | STRING_TYPE
          | BOOL_TYPE
     '''
+    pass
 
 def p_return_stmt(p):
     '''
@@ -161,7 +170,7 @@ def p_return_stmt(p):
 # Data structure - Slice. Ej. nombres := []string{} 
 def p_slice_decl(p):
     '''
-    slice_decl : VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET STRING_TYPE LBRACE RBRACE
+    slice_decl : VARIABLE DECLARE_ASSIGN LBRACKET RBRACKET type LBRACE RBRACE
     '''
     pass
 
@@ -169,49 +178,112 @@ def p_slice_decl(p):
 # MILENA PAZMIÑO CONTRIBUTION END
 # =====================================
 
+# =====================================
+# GABRIEL PELAEZ CONTRIBUTION START
+# =====================================
+
+# Variable declaration without initialization
+def p_var_decl(p):
+    '''
+    var_decl : VAR VARIABLE type
+    '''
+    pass
+
+# Switch control structure
+def p_switch_stmt(p):
+    '''
+    switch_stmt : SWITCH VARIABLE LBRACE case_list default_stmt RBRACE
+    '''
+    pass
+
+def p_case_list(p):
+    '''
+    case_list : case_list case_stmt
+              | case_stmt
+    '''
+    pass
 
 
+def p_case_stmt(p):
+    '''
+    case_stmt : CASE INTEGER COLON statements
+              | CASE STRING COLON statements
+    '''
+    pass
 
 
+def p_default_stmt(p):
+    '''
+    default_stmt : DEFAULT COLON statements
+    '''
+    pass
+
+# Map data structure. Example: edades := map[string]int{}
+def p_map_decl(p):
+    '''
+    map_decl : VARIABLE DECLARE_ASSIGN MAP LBRACKET STRING_TYPE RBRACKET type LBRACE RBRACE
+    '''
+    pass
+
+# Function with multiple parameters
+def p_multi_param_function(p):
+    '''
+    multi_param_function : FUNC VARIABLE LPAREN parameter_list RPAREN type LBRACE return_stmt RBRACE
+                         | FUNC VARIABLE LPAREN parameter_list RPAREN type LBRACE statements return_stmt RBRACE
+    '''
+    pass
+
+
+def p_parameter_list(p):
+    '''
+    parameter_list : parameter
+                   | parameter COMMA parameter_list
+    '''
+    pass
+
+
+def p_parameter(p):
+    '''
+    parameter : VARIABLE type
+    '''
+    pass
+
+# Input reading with fmt.Scan(&variable)
+def p_scan_stmt(p):
+    '''
+    scan_stmt : FMT DOT SCAN LPAREN AMPERSAND VARIABLE RPAREN
+    '''
+    pass
+
+# =====================================
+# GABRIEL PELAEZ CONTRIBUTION END
+# =====================================
 
 # =====================================
 # ERROR HANDLING
 # =====================================
+
 def p_error(p):
+
     if p:
-        print(
-            f"Error sintáctico en línea {p.lineno}: token inesperado '{p.value}'"
+        error_msg = (
+            f"Syntax error at line {p.lineno}: "
+            f"unexpected token '{p.value}'"
         )
+
     else:
-        print(
-            "Error sintáctico: fin de archivo inesperado"
+        error_msg = (
+            "Syntax error: unexpected end of file"
         )
 
+    syntax_errors.append(error_msg)
 
-
-# =====================================
-
-# =====================================
-
-
+    print(error_msg)
 
 
 # =====================================
 # BUILD PARSER
 # =====================================
 
-parser = yacc.yacc()
-
-lexer = build_lexer()
-
-while True:
-    try:
-        s = input('parser > ')
-    except EOFError:
-        break
-
-    if not s:
-        continue
-
-    result = parser.parse(s, lexer=lexer)
-    print("Entrada válida")
+def build_parser():
+    return yacc.yacc()

@@ -56,6 +56,7 @@ tokens = [
     'DOT',
     'SEMICOLON',
     'COLON',
+    'AMPERSAND',
     
     # ===== GABRIEL PELAEZ CONTRIBUTION END =====    
 ]
@@ -85,7 +86,7 @@ reserved_words = {
     'range': 'RANGE',
     'fmt': 'FMT',
     'Println': 'PRINTLN',
-    
+    'Scan': 'SCAN',
 }
 
 tokens = tokens + list(reserved_words.values())
@@ -139,6 +140,7 @@ t_COMMA    = r','
 t_DOT      = r'\.'
 t_SEMICOLON = r';'
 t_COLON     = r':'
+t_AMPERSAND = r'&'
 
 # =======================
 # GABRIEL PELAEZ CONTRIBUTION END
