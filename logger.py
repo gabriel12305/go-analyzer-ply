@@ -3,7 +3,7 @@ import os
 from lexer import lexical_errors
 from parser import syntax_errors
 
-def generate_log_filename(author_name="MilenaPazmiño"):
+def generate_log_filename(author_name = "MilenaPazmiño"):
     os.makedirs("logs", exist_ok=True)
 
     timestamp = datetime.now().strftime("%d-%m-%Y-%Hh%M")

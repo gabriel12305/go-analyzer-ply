@@ -18,11 +18,13 @@ tokens = [
     # ===== GABRIEL PELAEZ CONTRIBUTION START =====
     
     # Arithmetic Operators
+    'INCREMENT',    
     'PLUS',
     'MINUS',
     'TIMES',
     'DIVIDE',
     'MODULO',
+
     
     # Relational Operators
     'EQ',
@@ -86,6 +88,7 @@ reserved_words = {
     'range': 'RANGE',
     'fmt': 'FMT',
     'Println': 'PRINTLN',
+    'Print' : 'PRINT',
     'Scan': 'SCAN',
 }
 
@@ -105,6 +108,7 @@ def t_VARIABLE(t):
 # ==========================
 
 # Two-character operators
+t_INCREMENT = r'\+\+'
 t_EQ = r'=='
 t_DECLARE_ASSIGN = r':='
 t_NE = r'!='
@@ -141,6 +145,7 @@ t_DOT      = r'\.'
 t_SEMICOLON = r';'
 t_COLON     = r':'
 t_AMPERSAND = r'&'
+
 
 # =======================
 # GABRIEL PELAEZ CONTRIBUTION END
