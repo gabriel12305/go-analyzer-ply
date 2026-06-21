@@ -1,63 +1,61 @@
-package main
 
-import "fmt"
+// Declaración de variables con tipos de datos
+var edad int
+var promedio float64
+var nombre string
+var activo bool
 
-func main() {
+// Asignación de valores enteros
+edad := 21
 
-	// Declaración de variables con tipos de datos
-	var edad int
-	var promedio float64
-	var nombre string
-	var activo bool
+// Asignación de valores flotantes
+promedio := 9.75
 
-	// Asignación de valores enteros
-	edad = 21
+// Asignación de cadenas
+nombre := "Milena Pazmiño"
 
-	// Asignación de valores flotantes
-	promedio = 9.75
+// Asignación de valor booleano
+activo := true
 
-	// Asignación de cadenas
-	nombre = "Milena Pazmiño"
+/*
+	Comentario multilínea
+	para probar el reconocimiento
+	de comentarios
+*/
 
-	// Asignación de valor booleano
-	activo = true
+if edad > 18 {
+	mensaje := "Mayor de edad"
 
-	/*
-	   Comentario multilínea
-	   para probar el reconocimiento
-	   de comentarios
-	*/
-
-	if edad > 18 {
-		mensaje := "Mayor de edad"
-	}
-
-	// =====================================================
-	// PRUEBAS SINTÁCTICAS - MILENA PAZMIÑO
-	// =====================================================
-
-	nombreUsuario := "Milena"
-	edadUsuario := 21
-	promedioUsuario := 9.8
-	activoUsuario := true
-
-	fmt.Println(nombreUsuario)
-	fmt.Println(edadUsuario)
-	fmt.Println(activoUsuario)
-
-	nombresVacio := []string{}
-
-	for edadUsuario > 18 {
-		adulto := true
-	}
-
-	suma := 5 + 3
-	resta := 10 - 2
-	multiplicacion := 4 * 6
-	division := 20 / 5
-	operacionCompleta := (5 + 3) * 2
-
+} else {
+	mensaje := "Menor de edad"
 }
+
+// =====================================================
+// PRUEBAS SINTÁCTICAS - MILENA PAZMIÑO
+// =====================================================
+
+nombreUsuario := "Milena"
+edadUsuario := 21
+promedioUsuario := 9.8
+activoUsuario := true
+
+fmt.Println(nombreUsuario)
+fmt.Println(edadUsuario)
+fmt.Println(activoUsuario)
+
+nombresVacio := []string{}
+
+for edadUsuario > 18 {
+	adulto := true
+}
+
+suma := 5 + 3
+resta := 10 - 2
+multiplicacion := 4 * 6
+division := 20 / 5
+operacionCompleta := (5 + 3) * 2
+
+
 
 func obtenerEdad() int {
 	return 21
