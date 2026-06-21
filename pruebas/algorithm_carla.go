@@ -1,41 +1,46 @@
 package main
 
+import "fmt"
+
 func calcularDemanda() int {
-    const limite = 10
+	const limite = 10
 
-    var activo = true
-    var terminado = false
+	var activo = true
+	var terminado = false
 
-    var demanda = map[string]int{
-        "FIEC": 5,
-        "Rectorado": 8,
-        "Tecnologias": 3,
-    }
+	var demanda = map[string]int{
+		"FIEC":        5,
+		"Rectorado":   8,
+		"Tecnologias": 3,
+	}
 
-    var total = 0
+	var total = 0
 
-    for parada := range demanda {
-        total = total + demanda[parada]
-    }
+	for parada := range demanda {
+		total = total + demanda[parada]
+	}
 
-    if activo == true {
-        total = total + 1
-    } else {
-        total = total - 1
-    }
+	if activo == true {
+		total = total + 1
+	} else {
+		total = total - 1
+	}
 
-    switch total {
-    case 0:
-        terminado = true
-    case 10:
-        terminado = false
-    default:
-        terminado = false
-    }
+	switch total {
+	case 0:
+		terminado = true
+	case 10:
+		terminado = false
+	default:
+		terminado = false
+	}
 
-    if terminado == false {
-        return total
-    }
+	if terminado == false {
+		return total
+	}
 
-    return 0
+	fmt.Print("Hola")
+	fmt.Println("Hola")
+
+	return 0
 }
