@@ -18,6 +18,7 @@ tokens = [
     # ===== GABRIEL PELAEZ CONTRIBUTION START =====
     
     # Arithmetic Operators
+    'INCREMENT',
     'PLUS',
     'MINUS',
     'TIMES',
@@ -87,6 +88,7 @@ reserved_words = {
     'fmt': 'FMT',
     'Println': 'PRINTLN',
     'Scan': 'SCAN',
+    'Print' : 'PRINT',
 }
 
 tokens = tokens + list(reserved_words.values())
@@ -105,6 +107,7 @@ def t_VARIABLE(t):
 # ==========================
 
 # Two-character operators
+t_INCREMENT = r'\+\+'
 t_EQ = r'=='
 t_DECLARE_ASSIGN = r':='
 t_NE = r'!='

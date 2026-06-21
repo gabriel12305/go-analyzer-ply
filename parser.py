@@ -54,6 +54,12 @@ def p_statement(p):
               | map_decl
               | multi_param_function
               | scan_stmt
+              | complete_var_dec
+              | block
+              | if_else
+              | array_decl
+              | function_no_return
+              | increment_stmt
     '''
     pass
 
@@ -91,6 +97,12 @@ def p_expression_atom(p):
     '''
     pass
 
+def p_expression_list(p):
+    '''
+    expression_list : expression
+                    | expression COMMA expression_list
+    '''
+    pass
 
 # =====================================
 # CONDITIONS
@@ -116,6 +128,12 @@ def p_condition_logic(p):
     '''
     pass
 
+def p_condition_expr(p):
+    '''
+    condition : expression
+    '''
+    pass
+
 # =====================================
 # MILENA PAZMIÑO CONTRIBUTION START
 # =====================================
@@ -132,6 +150,7 @@ def p_short_var_decl(p):
 def p_print_stmt(p):
     '''
     print_stmt : FMT DOT PRINTLN LPAREN expression RPAREN
+                | FMT DOT PRINT LPAREN expression RPAREN
     '''
     pass
 
@@ -139,7 +158,7 @@ def p_print_stmt(p):
 # Control Structure for edad > 18 { }
 def p_for_stmt(p):
     '''
-    for_stmt : FOR condition LBRACE statements RBRACE
+    for_stmt : FOR condition block
     '''
     pass
 
@@ -255,8 +274,53 @@ def p_scan_stmt(p):
     '''
     pass
 
+def p_increment_stmt(p):
+    '''
+    increment_stmt : VARIABLE INCREMENT
+    '''
+    pass
+
 # =====================================
 # GABRIEL PELAEZ CONTRIBUTION END
+# =====================================
+
+# =====================================
+# CARLA GUTIERREZ CONTRIBUTION START
+# =====================================
+
+def p_complete_var_dec(p):
+    '''
+    complete_var_dec : VAR VARIABLE type ASSIGN expression
+    '''
+    pass
+
+def p_block(p):
+    '''
+    block : LBRACE statements RBRACE
+            | LBRACE RBRACE
+    '''
+    pass
+
+def p_if_else(p):
+    '''
+    if_else : IF condition block ELSE block
+    '''
+    pass
+
+def p_array_decl(p):
+    '''
+    array_decl : VARIABLE DECLARE_ASSIGN LBRACKET INTEGER RBRACKET type LBRACE expression_list RBRACE
+    '''
+    pass
+
+def p_function_no_return(p):
+    '''
+    function_no_return : FUNC VARIABLE LPAREN parameter_list RPAREN block
+    '''
+    pass
+
+# =====================================
+# CARLA GUTIERREZ CONTRIBUTION END
 # =====================================
 
 # =====================================

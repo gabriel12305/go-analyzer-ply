@@ -23,8 +23,7 @@ def main():
         parser.parse(data, lexer=lexer)
         
         log_filename = generate_log_filename(author)
-        
-        lexer = build_lexer()
+
         log_tokens(lexer, data, log_filename)
         
         log_syntax_results(log_filename)
