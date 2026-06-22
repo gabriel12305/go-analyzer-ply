@@ -241,6 +241,20 @@ def p_default_stmt(p):
 def p_map_decl(p):
     '''
     map_decl : VARIABLE DECLARE_ASSIGN MAP LBRACKET STRING_TYPE RBRACKET type LBRACE RBRACE
+             | VARIABLE DECLARE_ASSIGN MAP LBRACKET STRING_TYPE RBRACKET type LBRACE map_items RBRACE
+    '''
+    pass
+
+def p_map_items(p):
+    '''
+    map_items : map_item
+              | map_item COMMA map_items
+    '''
+    pass
+
+def p_map_item(p):
+    '''
+    map_item : STRING COLON expression
     '''
     pass
 
