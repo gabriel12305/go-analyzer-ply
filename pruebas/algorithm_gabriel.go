@@ -1,5 +1,4 @@
 var edad int
-
 var promedio float64 = 9.5
 
 nombre := "Gabriel"
@@ -8,17 +7,21 @@ activo := true
 resultado := (5 + 3) * 2
 residuo := 10 % 3
 
+decimal := float64(edad)
+
+fmt.Print(nombre)
 fmt.Println(nombre)
 
 fmt.Scan(&edad)
 
-if activo {
+if activo && edad >= 18 {
 }
 else {
 }
 
 for edad > 18 {
     contador := 1
+    contador++
 }
 
 niveles := []string{}
@@ -29,22 +32,21 @@ edades := map[string]int{}
 
 switch edad {
 
-    case 18:
-        mensaje := "Mayor de edad"
+case 18:
+    mayor := "Mayor"
 
-    case 21:
-        mensaje := "Universitario"
+case 21:
+    universitario := "Universitario"
 
-    default:
-        mensaje := "Otro"
+default:
+    otro := "Otro"
 
 }
 
 func saludar(nombre string) {
-
 }
 
-func sumar(a int, b int) int {
-    resultado := a + b
-    return resultado
+func obtenerCinco() int {
+    valor := 5
+    return valor
 }

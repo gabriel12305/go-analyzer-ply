@@ -29,3 +29,35 @@ def check_arithmetic_operands(left_type, right_type, operator, line=None):
         )
         return False
     return True
+
+# ==== GABRIEL PELAEZ CONTRIBUTION ====
+
+def check_type_conversion(source_type, target_type, line):
+
+    if source_type is None:
+        return
+
+    numeric = ['int', 'float64']
+
+    if source_type == target_type:
+        return
+
+    if source_type in numeric and target_type in numeric:
+        return
+
+    semantic_errors.append(
+        f"[Line {line}] Error Semántico [Conversión]: "
+        f"no es posible convertir un valor de tipo "
+        f"'{source_type}' a '{target_type}'."
+    )
+    
+def check_control_condition(condition_type, line):
+
+    if condition_type is None:
+        return
+
+    if condition_type != 'bool':
+        semantic_errors.append(
+            f"[Line {line}] Error Semántico [Estructura de Control]: "
+            f"la condición debe producir un valor de tipo bool."
+        )

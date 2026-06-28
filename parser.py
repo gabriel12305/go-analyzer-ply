@@ -100,6 +100,22 @@ def p_expression_group(p):
     # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
     p[0] = p[2]
 
+def p_expression_conversion(p):
+    '''
+    expression : INT_TYPE LPAREN expression RPAREN
+               | FLOAT64_TYPE LPAREN expression RPAREN
+    '''
+    # ==== GABRIEL PELAEZ CONTRIBUTION - SEMANTIC RULE ====
+    source_type = p[3]['type']
+    target_type = p[1]
+
+    semantic.check_type_conversion(
+        source_type,
+        target_type,
+        p.lineno(1)
+    )
+
+    p[0] = {'type': target_type}
 
 def p_expression_atom(p):
     '''
@@ -148,7 +164,8 @@ def p_condition_rel(p):
               | expression EQ expression
               | expression NE expression
     '''
-    pass
+    # ==== GABRIEL PELAEZ CONTRIBUTION - SEMANTIC RULE ====
+    p[0] = {'type': 'bool'}
 
 
 def p_condition_logic(p):
@@ -157,13 +174,15 @@ def p_condition_logic(p):
               | condition OR condition
               | NOT condition
     '''
-    pass
+    # ==== GABRIEL PELAEZ CONTRIBUTION - SEMANTIC RULE ====
+    p[0] = {'type': 'bool'}
 
 def p_condition_expr(p):
     '''
     condition : expression
     '''
-    pass
+    # ==== GABRIEL PELAEZ CONTRIBUTION - SEMANTIC RULE ====
+    p[0] = p[1]
 
 # =====================================
 # MILENA PAZMIÑO CONTRIBUTION START
@@ -193,7 +212,11 @@ def p_for_stmt(p):
     '''
     for_stmt : FOR condition block
     '''
-    pass
+    # ==== GABRIEL PELAEZ CONTRIBUTION - SEMANTIC RULE ====
+    semantic.check_control_condition(
+        p[2]['type'],
+        p.lineno(1)
+    )
 
 
 # function with return
@@ -423,7 +446,11 @@ def p_if_else(p):
     '''
     if_else : IF condition block ELSE block
     '''
-    pass
+    # ==== GABRIEL PELAEZ CONTRIBUTION - SEMANTIC RULE ====
+    semantic.check_control_condition(
+        p[2]['type'],
+        p.lineno(1)
+    )
 
 def p_array_decl(p):
     '''
