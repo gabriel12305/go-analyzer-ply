@@ -40,7 +40,15 @@ func calcularDemanda() int {
 	}
 
 	fmt.Print("Hola")
-	fmt.Println("Hola")
+	fmt.Println(variableinexistente)
 
+	var edad int = 10
+	fmt.Println(edad)
+
+	var a int = 10
+	var b int = 20
+	var c int = a + b
+
+	var resultado bool = activo + false
 	return 0
 }
