@@ -1,0 +1,12 @@
+===== ERRORES SEMÁNTICOS =====
+[Line 23] Error Semántico [Identificador]: la variable/función 'activo' no ha sido declarada.
+[Line 38] Error Semántico [Identificador]: la variable/función 'terminado' no ha sido declarada.
+[Line 43] Error Semántico [Identificador]: la variable/función 'variableinexistente' no ha sido declarada.
+[Line 53] Error Semántico [Tipos]: el operador '+' no está definido para operandos de tipo 'bool' y 'bool'.
+[Line 53] Error Semántico [Tipos]: no se puede asignar expresión de tipo 'int' a variable de tipo 'bool'.
+[Line 1] Error Semántico [Declaración]: la variable/función 'edad' ya fue declarada.
+[Line 6] Error Semántico [Declaración]: la variable/función 'activo' ya fue declarada.
+[Line 8] Error Semántico [Declaración]: la variable/función 'resultado' ya fue declarada.
+[Line 36] Error Semántico [Declaración]: la variable/función 'mensaje' ya fue declarada.
+[Line 39] Error Semántico [Declaración]: la variable/función 'mensaje' ya fue declarada.
+[Line 48] Error Semántico [Declaración]: la variable/función 'resultado' ya fue declarada.

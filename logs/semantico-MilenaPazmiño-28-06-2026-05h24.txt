@@ -1,0 +1,19 @@
+===== ERRORES SEMÁNTICOS =====
+[Line 23] Error Semántico [Identificador]: la variable/función 'activo' no ha sido declarada.
+[Line 38] Error Semántico [Identificador]: la variable/función 'terminado' no ha sido declarada.
+[Line 36] Error Semántico [Declaración]: la variable/función 'mensaje' ya fue declarada.
+[Line 39] Error Semántico [Declaración]: la variable/función 'mensaje' ya fue declarada.
+[Line 48] Error Semántico [Identificador]: la variable/función 'a' no ha sido declarada.
+[Line 48] Error Semántico [Identificador]: la variable/función 'b' no ha sido declarada.
+[Line 48] Error Semántico [Tipos]: el operador '+' no está definido para operandos de tipo 'None' y 'None'.
+[Line 48] Error Semántico [Declaración]: la variable/función 'resultado' ya fue declarada.
+[Line 3] Error Semántico [Declaración]: la variable/función 'edad' ya fue declarada.
+[Line 4] Error Semántico [Declaración]: la variable/función 'promedio' ya fue declarada.
+[Line 5] Error Semántico [Declaración]: la variable/función 'nombre' ya fue declarada.
+[Line 6] Error Semántico [Declaración]: la variable/función 'activo' ya fue declarada.
+[Line 9] Error Semántico [Declaración]: la variable/función 'edad' ya fue declarada.
+[Line 12] Error Semántico [Declaración]: la variable/función 'promedio' ya fue declarada.
+[Line 15] Error Semántico [Declaración]: la variable/función 'nombre' ya fue declarada.
+[Line 18] Error Semántico [Declaración]: la variable/función 'activo' ya fue declarada.
+[Line 27] Error Semántico [Declaración]: la variable/función 'mensaje' ya fue declarada.
+[Line 30] Error Semántico [Declaración]: la variable/función 'mensaje' ya fue declarada.

@@ -1,4 +1,6 @@
 import ply.yacc as yacc
+import semantic
+from semantic import semantic_errors, declare_identifier, lookup_identifier, check_arithmetic_operands
 from lexer import tokens, build_lexer
 
 syntax_errors = []
@@ -76,14 +78,26 @@ def p_expression_binop(p):
                | expression DIVIDE expression
                | expression MODULO expression
     '''
-    pass
+
+    # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
+    left_type = p[1]['type']   
+    right_type = p[3]['type']
+
+    check_arithmetic_operands(left_type, right_type, p[2], p.lineno(2))
+
+    if left_type == 'float64' or right_type == 'float64':
+        p[0] = {'type': 'float64'}
+    else:
+        p[0] = {'type': 'int'}
 
 
 def p_expression_group(p):
     '''
     expression : LPAREN expression RPAREN
     '''
-    pass
+
+    # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
+    p[0] = p[2]
 
 
 def p_expression_atom(p):
@@ -95,7 +109,23 @@ def p_expression_atom(p):
                | TRUE
                | FALSE
     '''
-    pass
+    # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
+    if p.slice[1].type == 'INTEGER':
+        p[0] = {'type': 'int', 'value': p[1]}
+
+    elif p.slice[1].type == 'FLOAT':
+        p[0] = {'type': 'float64', 'value': p[1]}
+
+    elif p.slice[1].type == 'STRING':
+        p[0] = {'type': 'string', 'value': p[1]}
+
+    elif p.slice[1].type == 'TRUE' or p.slice[1].type == 'FALSE':
+        p[0] = {'type': 'bool', 'value': p[1]}
+
+    elif p.slice[1].type == 'VARIABLE':
+        var_name = p[1]
+        var_type = lookup_identifier(var_name, p.lineno(1))
+        p[0] = {'type': var_type, 'value': var_name}
 
 def p_expression_list(p):
     '''
@@ -143,7 +173,9 @@ def p_short_var_decl(p):
     '''
     short_var_decl : VARIABLE DECLARE_ASSIGN expression
     '''
-    pass
+    
+    # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
+    declare_identifier(p[1], p[3]['type'], p.lineno(1))
 
 
 # fmt.Println(nombre)
@@ -178,7 +210,9 @@ def p_type(p):
          | STRING_TYPE
          | BOOL_TYPE
     '''
-    pass
+
+    # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
+    p[0] = p[1]
 
 def p_return_stmt(p):
     '''
@@ -206,7 +240,8 @@ def p_var_decl(p):
     '''
     var_decl : VAR VARIABLE type
     '''
-    pass
+    # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
+    declare_identifier(p[2], p[3], p.lineno(2))
 
 # Switch control structure
 def p_switch_stmt(p):
@@ -286,13 +321,15 @@ def p_scan_stmt(p):
     '''
     scan_stmt : FMT DOT SCAN LPAREN AMPERSAND VARIABLE RPAREN
     '''
-    pass
+    # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
+    lookup_identifier(p[6], p.lineno(6))
 
 def p_increment_stmt(p):
     '''
     increment_stmt : VARIABLE INCREMENT
     '''
-    pass
+    # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
+    lookup_identifier(p[1], p.lineno(1)) 
 
 # =====================================
 # GABRIEL PELAEZ CONTRIBUTION END
@@ -306,7 +343,19 @@ def p_complete_var_dec(p):
     '''
     complete_var_dec : VAR VARIABLE type ASSIGN expression
     '''
-    pass
+    var_name = p[2]          # Nombre de la variable
+    declared_type = p[3]     # Tipo declarado 
+    expr_type = p[5]['type']
+
+    declare_identifier(var_name, declared_type, p.lineno(2))
+
+    if declared_type != expr_type:
+        semantic_errors.append(
+            f"[Line {p.lineno(4)}] Error Semántico [Tipos]: no se puede asignar "
+            f"expresión de tipo '{expr_type}' a variable de tipo '{declared_type}'."
+        )
+
+    
 
 def p_block(p):
     '''

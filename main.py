@@ -1,6 +1,6 @@
 from lexer import build_lexer, lexical_errors
 import lexer
-from logger import generate_log_filename, log_syntax_results, log_tokens
+from logger import generate_log_filename, log_syntax_results, log_tokens, log_semantic_errors
 from parser import build_parser, syntax_errors
 
 def main():
@@ -27,6 +27,8 @@ def main():
         log_tokens(lexer, data, log_filename)
         
         log_syntax_results(log_filename)
+
+        log_semantic_errors(author)
 
 
 if __name__ == "__main__":
