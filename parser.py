@@ -62,6 +62,7 @@ def p_statement(p):
               | array_decl
               | function_no_return
               | increment_stmt
+              | assignment_stmt
     '''
     pass
 
@@ -173,7 +174,7 @@ def p_short_var_decl(p):
     '''
     short_var_decl : VARIABLE DECLARE_ASSIGN expression
     '''
-    
+    # ===== MILENA PAZMIÑO CONTRIBUTION - SEMANTIC RULE - Aquí no existe declaración de tipos =====
     # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
     declare_identifier(p[1], p[3]['type'], p.lineno(1))
 
@@ -201,7 +202,24 @@ def p_function_decl(p):
     function_decl : FUNC VARIABLE LPAREN RPAREN type LBRACE return_stmt RBRACE
                   | FUNC VARIABLE LPAREN RPAREN type LBRACE statements return_stmt RBRACE
     '''
-    pass
+    
+    #==== MILENA PAZMIÑO CONTRIBUTION - SEMANTIC RULE - Funcion con retorno ====
+    #Para esto fue necesario que p_type y p_return_stmt devuelvan el tipo de la expresión, 
+    #para poder comparar si el tipo de retorno de la función coincide con el tipo de la expresión retornada.
+    
+    expected_type = p[5]
+
+    if len(p) == 9: #Len (p) calcula el número de elementos en la producción. 
+        returned_type = p[7]['type']
+    else:
+        returned_type = p[8]['type']
+
+    if expected_type != returned_type:
+        semantic_errors.append(
+            f"[Line {p.lineno(5)}] Error Semántico [Retorno de Función]: "
+            f"se esperaba un valor de tipo '{expected_type}' "
+            f"pero se retornó un valor de tipo '{returned_type}'."
+        )
 
 def p_type(p):
     '''
@@ -212,13 +230,13 @@ def p_type(p):
     '''
 
     # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
-    p[0] = p[1]
+    p[0] = p[1] #Necesario para que la función devuelva el tipo, útil para validaciones semánticas posteriores.
 
 def p_return_stmt(p):
     '''
     return_stmt : RETURN expression
     '''
-    pass
+    p[0] = p[2] #Necesario para que la función devuelva el tipo de la expresión retornada, útil para validaciones semánticas posteriores.
 
 # Data structure - Slice. Ej. nombres := []string{} 
 def p_slice_decl(p):
@@ -242,6 +260,24 @@ def p_var_decl(p):
     '''
     # ===== CARLA GUTIERREZ CONTRIBUTION - SEMANTIC RULE =====
     declare_identifier(p[2], p[3], p.lineno(2))
+
+
+def p_assignment_stmt(p):
+    '''
+    assignment_stmt : VARIABLE ASSIGN expression
+    '''
+    # ===== MILENA PAZMIÑO CONTRIBUTION - SEMANTIC RULE =====
+    var_name = p[1]
+
+    declared_type = lookup_identifier(var_name, p.lineno(1)) # Verifica si la variable fue declarada y obtiene su tipo
+    expr_type = p[3]['type']
+
+    if declared_type is not None and declared_type != expr_type:
+        semantic_errors.append(
+            f"[Line {p.lineno(2)}] Error Semántico [Asignación de Tipo]: "
+            f"no se puede asignar un valor de tipo '{expr_type}' "
+            f"a una variable de tipo '{declared_type}'."
+        )
 
 # Switch control structure
 def p_switch_stmt(p):
@@ -299,7 +335,23 @@ def p_multi_param_function(p):
     multi_param_function : FUNC VARIABLE LPAREN parameter_list RPAREN type LBRACE return_stmt RBRACE
                          | FUNC VARIABLE LPAREN parameter_list RPAREN type LBRACE statements return_stmt RBRACE
     '''
-    pass
+    #=== MILENA PAZMIÑO CONTRIBUTION - SEMANTIC RULE - Funcion con retorno ====
+    #Para esto fue necesario que p_type y p_return_stmt devuelvan el tipo de la expresión, 
+    #para poder comparar si el tipo de retorno de la función coincide con el tipo de la expresión retornada.
+    
+    expected_type = p[6]
+
+    if len(p) == 10:
+        returned_type = p[8]['type']
+    else:
+        returned_type = p[9]['type']
+
+    if expected_type != returned_type:
+        semantic_errors.append(
+            f"[Line {p.lineno(6)}] Error Semántico [Retorno de Función]: "
+            f"se esperaba un valor de tipo '{expected_type}' "
+            f"pero se retornó un valor de tipo '{returned_type}'."
+        )
 
 
 def p_parameter_list(p):
@@ -343,11 +395,14 @@ def p_complete_var_dec(p):
     '''
     complete_var_dec : VAR VARIABLE type ASSIGN expression
     '''
-    var_name = p[2]          # Nombre de la variable
-    declared_type = p[3]     # Tipo declarado 
+    
+    # ==== MILENA PAZMIÑO CONTRIBUTION - SEMANTIC RULE ====
+    
+    var_name = p[2]          
+    declared_type = p[3]   
     expr_type = p[5]['type']
 
-    declare_identifier(var_name, declared_type, p.lineno(2))
+    declare_identifier(var_name, declared_type, p.lineno(2)) # Verifica si la variable ya fue declarada y la registra en la tabla de símbolos
 
     if declared_type != expr_type:
         semantic_errors.append(

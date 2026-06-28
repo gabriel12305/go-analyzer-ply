@@ -2,6 +2,7 @@ from lexer import build_lexer, lexical_errors
 import lexer
 from logger import generate_log_filename, log_syntax_results, log_tokens, log_semantic_errors
 from parser import build_parser, syntax_errors
+from semantic import semantic_errors, symbol_table
 
 def main():
 
@@ -12,6 +13,9 @@ def main():
     for author,test in test_authors.items():
         lexical_errors.clear()
         syntax_errors.clear()
+        semantic_errors.clear()
+        symbol_table.clear()
+        
         file_path = test
 
         with open(file_path, "r", encoding="utf-8") as archivo:

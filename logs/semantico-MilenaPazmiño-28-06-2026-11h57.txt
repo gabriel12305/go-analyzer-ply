@@ -1,0 +1,2 @@
+===== ERRORES SEMÁNTICOS =====
+[Line 30] Error Semántico [Declaración]: la variable/función 'mensaje' ya fue declarada.

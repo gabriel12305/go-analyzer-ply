@@ -6,28 +6,29 @@ var nombre string
 var activo bool
 
 // Asignación de valores enteros
-edad := 21
+edad = 21
 
 // Asignación de valores flotantes
-promedio := 9.75
+promedio = 9.75
 
 // Asignación de cadenas
-nombre := "Milena Pazmiño"
+nombre = "Milena Pazmiño"
 
 // Asignación de valor booleano
-activo := true
+activo = true
 
 /*
 	Comentario multilínea
 	para probar el reconocimiento
 	de comentarios
 */
+var mensaje string
 
 if edad > 18 {
-	mensaje := "Mayor de edad"
+	mensaje = "Mayor de edad"
 
 } else {
-	mensaje := "Menor de edad"
+	mensaje = "Menor de edad"
 }
 
 // =====================================================

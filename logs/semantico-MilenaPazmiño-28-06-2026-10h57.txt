@@ -1,0 +1,6 @@
+===== ERRORES SEMÁNTICOS =====
+[Line 9] Error Semántico [Declaración]: la variable/función 'edad' ya fue declarada.
+[Line 12] Error Semántico [Declaración]: la variable/función 'promedio' ya fue declarada.
+[Line 15] Error Semántico [Declaración]: la variable/función 'nombre' ya fue declarada.
+[Line 18] Error Semántico [Declaración]: la variable/función 'activo' ya fue declarada.
+[Line 30] Error Semántico [Declaración]: la variable/función 'mensaje' ya fue declarada.

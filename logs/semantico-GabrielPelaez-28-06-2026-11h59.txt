@@ -1,0 +1,7 @@
+===== ERRORES SEMÁNTICOS =====
+[Line 36] Error Semántico [Declaración]: la variable/función 'mensaje' ya fue declarada.
+[Line 39] Error Semántico [Declaración]: la variable/función 'mensaje' ya fue declarada.
+[Line 48] Error Semántico [Identificador]: la variable/función 'a' no ha sido declarada.
+[Line 48] Error Semántico [Identificador]: la variable/función 'b' no ha sido declarada.
+[Line 48] Error Semántico [Tipos]: el operador '+' no está definido para operandos de tipo 'None' y 'None'.
+[Line 48] Error Semántico [Declaración]: la variable/función 'resultado' ya fue declarada.
