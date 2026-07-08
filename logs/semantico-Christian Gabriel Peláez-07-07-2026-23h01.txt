@@ -1,0 +1,18 @@
+===== ERRORES SEMÁNTICOS =====
+[Line 6] Error Semántico [Identificador]: la variable/función 'limite' no ha sido declarada.
+[Line 20] Error Semántico [Identificador]: la variable/función 'total' no ha sido declarada.
+[Line 23] Error Semántico [Identificador]: la variable/función 'activo' no ha sido declarada.
+[Line 24] Error Semántico [Identificador]: la variable/función 'total' no ha sido declarada.
+[Line 24] Error Semántico [Tipos]: el operador '+' no está definido para operandos de tipo 'None' y 'int'.
+[Line 24] Error Semántico [Identificador]: la variable/función 'total' no ha sido declarada.
+[Line 26] Error Semántico [Identificador]: la variable/función 'total' no ha sido declarada.
+[Line 26] Error Semántico [Tipos]: el operador '-' no está definido para operandos de tipo 'None' y 'int'.
+[Line 26] Error Semántico [Identificador]: la variable/función 'total' no ha sido declarada.
+[Line 31] Error Semántico [Identificador]: la variable/función 'terminado' no ha sido declarada.
+[Line 33] Error Semántico [Identificador]: la variable/función 'terminado' no ha sido declarada.
+[Line 35] Error Semántico [Identificador]: la variable/función 'terminado' no ha sido declarada.
+[Line 38] Error Semántico [Identificador]: la variable/función 'terminado' no ha sido declarada.
+[Line 43] Error Semántico [Identificador]: la variable/función 'variableinexistente' no ha sido declarada.
+[Line 52] Error Semántico [Identificador]: la variable/función 'activo' no ha sido declarada.
+[Line 52] Error Semántico [Tipos]: el operador '+' no está definido para operandos de tipo 'None' y 'bool'.
+[Line 52] Error Semántico [Tipos]: no se puede asignar expresión de tipo 'int' a variable de tipo 'bool'.

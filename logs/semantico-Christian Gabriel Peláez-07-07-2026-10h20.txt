@@ -1,0 +1,3 @@
+===== ERRORES SEMÁNTICOS =====
+[Line 15] Error Semántico [Asignación de Tipo]: no se puede asignar un valor de tipo 'string' a una variable de tipo 'int'.
+[Line 17] Error Semántico [Identificador]: la variable/función 'x' no ha sido declarada.
