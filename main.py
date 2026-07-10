@@ -1,6 +1,6 @@
 from lexer import build_lexer, lexical_errors
 import lexer
-from logger import generate_log_filename, log_syntax_results, log_tokens, log_semantic_errors
+from logger import generate_log_filename, log_syntax_results, log_lexical_results, log_semantic_errors
 from parser import build_parser, syntax_errors
 from semantic import semantic_errors, symbol_table
 
@@ -23,15 +23,24 @@ def main():
 
         lexer = build_lexer()
         parser = build_parser()
-        
+
+        # Capturamos los tokens en la única pasada real del parser,
+        # así no se vuelve a tokenizar (y no se duplican errores léxicos)
+        captured_tokens = []
+        original_token = lexer.token
+        def token_wrapper():
+            tok = original_token()
+            if tok:
+                captured_tokens.append((tok.type, tok.value, tok.lineno))
+            return tok
+        lexer.token = token_wrapper
+
         parser.parse(data, lexer=lexer)
         
         log_filename = generate_log_filename(author)
-
-        log_tokens(lexer, data, log_filename)
-        
         log_syntax_results(log_filename)
 
+        log_lexical_results(captured_tokens, author)
         log_semantic_errors(author)
 
 

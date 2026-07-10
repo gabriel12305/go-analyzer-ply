@@ -158,27 +158,28 @@ class Analyzer:
         con el mismo lexer (evita duplicar lexical_errors) y usando el resultado
         de una única pasada ya calculado en `result`."""
         os.makedirs("logs", exist_ok=True)
-        log_filename = logger.generate_log_filename(author)
-
-        with open(log_filename, "w", encoding="utf-8") as f:
-            for tok in result.tokens:
-                f.write(f"[Line {tok.lineno}] {tok.type:<15} -> {tok.value}\n")
-
         lexer.lexical_errors.clear()
         lexer.lexical_errors.extend(result.lexical_errors)
         go_parser.syntax_errors.clear()
         go_parser.syntax_errors.extend(result.syntax_errors)
-        logger.log_syntax_results(log_filename)
-
         semantic.semantic_errors.clear()
         semantic.semantic_errors.extend(result.semantic_errors)
-        logger.log_semantic_errors(author)
 
+        # Log léxico: tokens reconocidos + errores léxicos (o mensaje de éxito)
+        tokens_list = [(tok.type, tok.value, tok.lineno) for tok in result.tokens]
+        lex_filename = logger.log_lexical_results(tokens_list, author)
+
+        # Log sintáctico: solo el resultado sintáctico (sin tokens ni léxico)
+        log_filename = logger.generate_log_filename(author)
+        logger.log_syntax_results(log_filename)
+
+        # Log semántico
+        logger.log_semantic_errors(author)
         sem_files = sorted(
             glob.glob(f"logs/semantico-{author}-*.txt"), key=os.path.getmtime
         )
         sem_filename = sem_files[-1] if sem_files else None
-        return log_filename, sem_filename
+        return lex_filename, log_filename, sem_filename
 
 
 # =====================================================================
@@ -673,9 +674,9 @@ class GoAnalyzerApp(ctk.CTk):
         self._set_tree_text(build_block_tree(result.tokens))
 
         try:
-            log_file, sem_file = self.analyzer.write_logs(code, result, self.settings["author"])
-            self.last_log_files = (log_file, sem_file)
-            self._show_logs(log_file, sem_file)
+            lex_file, log_file, sem_file = self.analyzer.write_logs(code, result, self.settings["author"])
+            self.last_log_files = (lex_file, log_file, sem_file)
+            self._show_logs(lex_file, log_file, sem_file)
         except Exception as exc:
             self._set_logs_text(f"No se pudieron generar los logs: {exc}")
 
@@ -810,15 +811,18 @@ class GoAnalyzerApp(ctk.CTk):
         self.logs_text.insert("1.0", content)
         self.logs_text.configure(state="disabled")
 
-    def _show_logs(self, log_file, sem_file):
+    def _show_logs(self, lex_file, log_file, sem_file):
         parts = []
+        if lex_file and os.path.isfile(lex_file):
+            with open(lex_file, "r", encoding="utf-8") as f:
+                parts.append(f"===== {lex_file} =====\n{f.read()}")
         if log_file and os.path.isfile(log_file):
             with open(log_file, "r", encoding="utf-8") as f:
                 parts.append(f"===== {log_file} =====\n{f.read()}")
         if sem_file and os.path.isfile(sem_file):
             with open(sem_file, "r", encoding="utf-8") as f:
                 parts.append(f"===== {sem_file} =====\n{f.read()}")
-        info = f"Archivos generados: {log_file or '-'} | {sem_file or '-'}"
+        info = f"Archivos generados: {lex_file or '-'} | {log_file or '-'} | {sem_file or '-'}"
         self._set_logs_text("\n\n".join(parts) if parts else "No se generó contenido de log.", info=info)
 
     # -----------------------------------------------------------------
