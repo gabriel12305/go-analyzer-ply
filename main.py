@@ -24,8 +24,6 @@ def main():
         lexer = build_lexer()
         parser = build_parser()
 
-        # Capturamos los tokens en la única pasada real del parser,
-        # así no se vuelve a tokenizar (y no se duplican errores léxicos)
         captured_tokens = []
         original_token = lexer.token
         def token_wrapper():
