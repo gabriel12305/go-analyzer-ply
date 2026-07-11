@@ -1,0 +1,8 @@
+
+===== SYNTAX ERRORS =====
+Syntax error at line 1: unexpected token 'package'
+Syntax error at line 6: unexpected token 'const'
+Syntax error at line 8: unexpected token '='
+Syntax error at line 20: unexpected token '['
+Syntax error at line 39: unexpected token 'return'
+Syntax error at line 53: unexpected token 'return'
