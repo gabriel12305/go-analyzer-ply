@@ -191,34 +191,63 @@ go-analyzer-ply/
 
 # Requirements and Installation
 
-Python **3.13** (or higher) is required.
+Python **3.11** (or higher) is required.
 
 You can verify your installed version with:
 
 ```bash
-py -0                # Windows
-python3 --version    # macOS / Linux
+python --version      # Windows
+python3 --version     # macOS / Linux
 ```
 
 It is recommended to create a virtual environment before installing the project dependencies.
 
 ## Windows
 
+Create the virtual environment:
+
 ```bash
-py -3.13 -m venv venv
+python -m venv venv
+```
 
-venv\Scripts\activate
+Activate the virtual environment:
 
+```powershell
+venv\Scripts\Activate.ps1
+```
+
+> **Note (PowerShell users):**
+> If script execution is disabled and you receive an error such as *"running scripts is disabled on this system"*, execute the following command once:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+```
+
+Then activate the virtual environment again:
+
+```powershell
+venv\Scripts\Activate.ps1
+```
+
+Finally, install the required dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
 ## macOS / Linux
 
+Create and activate the virtual environment:
+
 ```bash
-python3.13 -m venv venv
+python3 -m venv venv
 
 source venv/bin/activate
+```
 
+Install the project dependencies:
+
+```bash
 pip install -r requirements.txt
 ```
 
