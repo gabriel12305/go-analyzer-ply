@@ -1,5 +1,7 @@
 var edad int
 var promedio float64 = 9.5
+var a int
+var b int
 
 nombre := "Gabriel"
 activo := true
@@ -30,7 +32,7 @@ numeros := [3]int{1, 2, 3}
 
 edades := map[string]int{}
 
-switch edad {
+switch edad { 
 
 case 18:
     mayor := "Mayor"
@@ -49,4 +51,8 @@ func saludar(nombre string) {
 func obtenerCinco() int {
     valor := 5
     return valor
+}
+
+func suma(a int, b int) int {
+    return a + b
 }
