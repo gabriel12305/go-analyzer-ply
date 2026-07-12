@@ -1,0 +1,8 @@
+===== ERRORES SEMÁNTICOS =====
+[Line 50] Error Semántico [Asignación de Tipo]: no se puede asignar un valor de tipo 'string' a una variable de tipo 'int'.
+[Line 56] Error Semántico [Asignación de Tipo]: no se puede asignar un valor de tipo 'bool' a una variable de tipo 'float64'.
+[Line 62] Error Semántico [Asignación de Tipo]: no se puede asignar un valor de tipo 'int' a una variable de tipo 'string'.
+[Line 68] Error Semántico [Asignación de Tipo]: no se puede asignar un valor de tipo 'string' a una variable de tipo 'bool'.
+[Line 0] Error Semántico [Retorno de Función]: se esperaba un valor de tipo 'int' pero se retornó un valor de tipo 'bool'.
+[Line 0] Error Semántico [Retorno de Función]: se esperaba un valor de tipo 'float64' pero se retornó un valor de tipo 'string'.
+[Line 0] Error Semántico [Retorno de Función]: se esperaba un valor de tipo 'bool' pero se retornó un valor de tipo 'string'.

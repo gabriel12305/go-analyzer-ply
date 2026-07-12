@@ -239,7 +239,7 @@ def p_function_decl(p):
 
     if expected_type != returned_type:
         semantic_errors.append(
-            f"[Line {p.lineno(5)}] Error Semántico [Retorno de Función]: "
+            f"[Line {p.lineno(2)}] Error Semántico [Retorno de Función]: "
             f"se esperaba un valor de tipo '{expected_type}' "
             f"pero se retornó un valor de tipo '{returned_type}'."
         )
@@ -371,7 +371,7 @@ def p_multi_param_function(p):
 
     if expected_type != returned_type:
         semantic_errors.append(
-            f"[Line {p.lineno(6)}] Error Semántico [Retorno de Función]: "
+            f"[Line {p.lineno(2)}] Error Semántico [Retorno de Función]: "
             f"se esperaba un valor de tipo '{expected_type}' "
             f"pero se retornó un valor de tipo '{returned_type}'."
         )

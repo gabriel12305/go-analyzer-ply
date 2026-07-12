@@ -1,0 +1,8 @@
+
+===== SYNTAX ERRORS =====
+Syntax error at line 87: unexpected token '='
+Syntax error at line 108: unexpected token '10'
+Syntax error at line 118: unexpected token 'if'
+Syntax error at line 120: unexpected token '}'
+Syntax error at line 127: unexpected token '}'
+Syntax error at line 137: unexpected token 'for'
